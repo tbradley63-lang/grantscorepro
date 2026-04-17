@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GrantScore Pro — Know Your Score Before You Submit</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{min-height:100vh;background:#0a0a0f;color:#e8e8ec;font-family:'Courier New','Lucida Console',monospace}
+.grid{position:fixed;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+.header{border-bottom:1px solid rgba(255,255,255,0.08);padding:20px 32px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:10}
+.logo{font-size:20px;font-weight:900;color:#fff;letter-spacing:-1px}
+.logo span{font-size:9px;background:#3b9eff;color:#000;padding:2px 6px;border-radius:3px;font-weight:800;letter-spacing:2px;margin-left:6px}
+.tagline{font-size:10px;color:rgba(255,255,255,0.3);letter-spacing:3px}
+.main{max-width:900px;margin:0 auto;padding:40px 24px;position:relative;z-index:10}
+.hero-title{font-size:34px;font-weight:900;letter-spacing:-1.5px;line-height:1.1;margin-bottom:12px;color:#fff}
+.hero-title span{color:#3b9eff}
+.hero-sub{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:32px;max-width:520px}
+.stats{display:flex;gap:32px;margin-bottom:40px}
+.stat-val{font-size:20px;font-weight:900;color:#3b9eff}
+.stat-lab{font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:2px;text-transform:uppercase}
+.card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:24px;margin-bottom:20px}
+.label{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:3px;margin-bottom:8px;display:block;text-transform:uppercase}
+select,textarea{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;padding:12px 16px;font-size:13px;font-family:'Courier New',monospace;outline:none;cursor:pointer}
+select{margin-bottom:20px}
+textarea{min-height:240px;resize:vertical;line-height:1.7}
+.btn{display:inline-flex;align-items:center;gap:8px;background:#3b9eff;color:#000;border:none;border-radius:8px;padding:14px 28px;font-size:12px;font-family:'Courier New',monospace;font-weight:800;letter-spacing:1.5px;cursor:pointer;text-transform:uppercase}
+.btn-sec{display:inline-flex;align-items:center;background:transparent;color:rgba(255,255,255,0.5);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:10px 20px;font-size:11px;font-family:'Courier New',monospace;font-weight:700;letter-spacing:1.5px;cursor:pointer;text-transform:uppercase}
+.error-box{background:rgba(245,101,101,0.1);border:1px solid rgba(245,101,101,0.3);border-radius:8px;padding:10px 14px;font-size:12px;color:#f56565;margin-bottom:16px;display:none}
+.loading{text-align:center;padding:80px 40px;display:none}
+.spinner{width:50px;height:50px;border-radius:50%;border:2px solid rgba(59,158,255,0.2);border-top-color:#3b9eff;animation:spin 0.9s linear infinite;margin:0 auto 24px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loading-title{font-size:28px;font-weight:900;color:#fff;margin-bottom:12px}
+.loading-msg{font-size:11px;color:#3b9eff;letter-spacing:2px}
+.results{display:none}
+.score-header{display:flex;align-items:center;gap:28px;margin-bottom:28px;flex-wrap:wrap}
+.total-score{font-size:42px;font-weight:900;line-height:1}
+.tier-badge{display:inline-block;margin-top:8px;padding:4px 12px;border-radius:6px;font-size:10px;font-weight:800;letter-spacing:2px}
+.bar-wrap{margin-bottom:10px}
+.bar-label{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.6);margin-bottom:4px}
+.bar-track{height:4px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden}
+.bar-fill{height:100%;border-radius:2px}
+.dim-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;margin-bottom:20px}
+.dim-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:18px}
+.dim-name{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:2px;margin-bottom:4px;text-transform:uppercase}
+.dim-score{font-size:26px;font-weight:900;margin-bottom:6px}
+.dim-tier{font-size:9px;padding:2px 8px;border-radius:4px;font-weight:800;letter-spacing:1.5px;display:inline-block;margin-bottom:10px}
+.dim-finding{font-size:11px;color:rgba(255,255,255,0.55);line-height:1.65;margin-bottom:10px}
+.rec-title{font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:2px;margin-bottom:6px;text-transform:uppercase}
+.rec-item{font-size:10px;color:rgba(255,255,255,0.5);line-height:1.6;padding-left:10px;border-left:2px solid rgba(59,158,255,0.3);margin-bottom:4px}
+.two-col{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:20px}
+.list-item{font-size:11px;color:rgba(255,255,255,0.65);line-height:1.65;padding-left:12px;margin-bottom:6px}
+.char-count{font-size:10px;color:rgba(255,255,255,0.25);letter-spacing:1px}
+.dim-preview{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dim-prev-item{display:flex;gap:10px;padding:8px 0;border-bottom:1px solid rgba(255,255,255,0.04)}
+.dim-prev-name{font-size:11px;color:rgba(255,255,255,0.7);font-weight:700}
+.dim-prev-desc{font-size:9px;color:rgba(255,255,255,0.3);margin-top:2px;line-height:1.4}
+.weight-badge{font-size:9px;background:rgba(255,255,255,0.07);color:rgba(255,255,255,0.4);padding:1px 5px;border-radius:3px;margin-left:4px}
+.verdict-card{border-radius:10px;padding:16px 20px;margin-bottom:16px}
+.verdict-label{font-size:9px;letter-spacing:3px;margin-bottom:6px;text-transform:uppercase}
+.verdict-text{font-size:13px;color:#fff;line-height:1.6}
+.revision-pills{display:flex;flex-wrap:wrap;gap:8px}
+.rev-pill{font-size:10px;padding:5px 12px;border-radius:6px;font-weight:700}
+select option{background:#1a1a2e;color:#fff}
+</style>
+</head>
+<body>
+<div class="grid"></div>
+
+<div class="header">
+  <div><span class="logo">GRANTSCORE<span>PRO</span></span></div>
+  <span class="tagline">GRANT READINESS ENGINE</span>
+  <span style="font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:1px">FEDERAL · PRIVATE · STATE · COMMUNITY</span>
+</div>
+
+<div class="main">
+  <!-- INPUT -->
+  <div id="input-view">
+    <div style="margin-bottom:40px">
+      <h1 class="hero-title">Know your score<br><span>before you submit.</span></h1>
+      <p class="hero-sub">Paste your complete grant application and receive reviewer-grade scoring across 8 weighted dimensions with specific, actionable feedback.</p>
+      <div class="stats">
+        <div><div class="stat-val">8</div><div class="stat-lab">Scoring Dimensions</div></div>
+        <div><div class="stat-val">100pt</div><div class="stat-lab">Scale</div></div>
+        <div><div class="stat-val">Federal+</div><div class="stat-lab">Grant Types</div></div>
+        <div><div class="stat-val">AI</div><div class="stat-lab">Reviewer Grade</div></div>
+      </div>
+    </div>
+    <div id="error-box" class="error-box"></div>
+    <div class="card">
+      <label class="label">Grant Application Type</label>
+      <select id="grant-type">
+        <option value="federal">Federal Grant (NOFO / RFP)</option>
+        <option value="state">State Agency Grant</option>
+        <option value="foundation">Private Foundation</option>
+        <option value="corporate">Corporate / CSR</option>
+        <option value="community">Community Foundation</option>
+        <option value="capacity">Capacity Building Grant</option>
+      </select>
+      <label class="label">Paste Your Complete Grant Application</label>
+      <textarea id="app-text" placeholder="Paste your full application here — narrative, goals, budget justification, evaluation plan, organizational capacity, and all other sections.&#10;&#10;Works with: NIH, USDA, HHS, NEA, NEH, DOE, Ford, Gates, Kellogg, community foundations, corporate CSR, and more.&#10;&#10;Minimum 200 characters required."></textarea>
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-top:16px">
+        <span class="char-count" id="char-count">0 CHARACTERS</span>
+        <button class="btn" onclick="runScore()">SCORE APPLICATION →</button>
+      </div>
+    </div>
+    <div class="card">
+      <label class="label">Scoring Dimensions & Weights</label>
+      <div class="dim-preview" id="dim-preview"></div>
+    </div>
+  </div>
+
+  <!-- LOADING -->
+  <div class="loading" id="loading-view">
+    <div class="spinner"></div>
+    <div class="loading-title">ANALYZING</div>
+    <div class="loading-msg" id="loading-msg">Parsing grant application structure...</div>
+  </div>
+
+  <!-- RESULTS -->
+  <div class="results" id="results-view"></div>
+</div>
+
+<script>
+const DIMS=[
+  {id:"need",label:"Statement of Need",weight:15,icon:"◈",desc:"Clarity, urgency, and evidence-based articulation of the problem"},
+  {id:"goals",label:"Goals & Objectives",weight:15,icon:"◎",desc:"SMART criteria adherence and alignment to funder priorities"},
+  {id:"methodology",label:"Program Design & Methodology",weight:20,icon:"◉",desc:"Evidence-based approach, innovation, and implementation clarity"},
+  {id:"evaluation",label:"Evaluation Plan",weight:15,icon:"◐",desc:"Data collection rigor, metrics quality, and accountability structures"},
+  {id:"budget",label:"Budget Justification",weight:15,icon:"◑",desc:"Cost reasonableness, line-item clarity, and leverage/match"},
+  {id:"capacity",label:"Organizational Capacity",weight:10,icon:"◒",desc:"Track record, leadership, partnerships, and infrastructure"},
+  {id:"equity",label:"Equity & Inclusion",weight:5,icon:"◓",desc:"Demonstrated commitment to serving underrepresented populations"},
+  {id:"sustainability",label:"Sustainability",weight:5,icon:"◔",desc:"Plan for continuation beyond grant period"},
+];
+const LOADING_MSGS=["Parsing grant application structure...","Evaluating statement of need...","Analyzing methodology rigor...","Scoring budget justification...","Checking evaluation framework...","Running equity & sustainability audit...","Calculating weighted composite score...","Generating reviewer recommendations..."];
+
+function getTier(s){
+  if(s>=90)return{label:"FUNDABLE",color:"#00d084",bg:"rgba(0,208,132,0.1)",border:"rgba(0,208,132,0.3)"};
+  if(s>=75)return{label:"COMPETITIVE",color:"#3b9eff",bg:"rgba(59,158,255,0.1)",border:"rgba(59,158,255,0.3)"};
+  if(s>=60)return{label:"NEEDS REVISION",color:"#f0b429",bg:"rgba(240,180,41,0.1)",border:"rgba(240,180,41,0.3)"};
+  return{label:"MAJOR REWORK",color:"#f56565",bg:"rgba(245,101,101,0.1)",border:"rgba(245,101,101,0.3)"};
+}
+
+document.getElementById('app-text').addEventListener('input',function(){
+  document.getElementById('char-count').textContent=this.value.length.toLocaleString()+' CHARACTERS';
+});
+
+const dp=document.getElementById('dim-preview');
+DIMS.forEach(d=>{
+  dp.innerHTML+=`<div class="dim-prev-item"><span style="font-size:14px;color:rgba(255,255,255,0.25);flex-shrink:0">${d.icon}</span><div><div class="dim-prev-name">${d.label}<span class="weight-badge">${d.weight}%</span></div><div class="dim-prev-desc">${d.desc}</div></div></div>`;
+});
+
+let loadInterval=null;
+async function runScore(){
+  const text=document.getElementById('app-text').value.trim();
+  const gtype=document.getElementById('grant-type').value;
+  const err=document.getElementById('error-box');
+  err.style.display='none';
+  if(text.length<200){err.textContent='Please paste your full grant application (at least 200 characters).';err.style.display='block';return;}
+  document.getElementById('input-view').style.display='none';
+  document.getElementById('loading-view').style.display='block';
+  let idx=0;const msgEl=document.getElementById('loading-msg');
+  msgEl.textContent=LOADING_MSGS[0];
+  loadInterval=setInterval(()=>{idx=(idx+1)%LOADING_MSGS.length;msgEl.textContent=LOADING_MSGS[idx];},1400);
+
+  const sys=`You are a senior federal grant reviewer with 20+ years of experience. Score this grant application across 8 dimensions. Respond ONLY with valid JSON (no markdown, no backticks):
+{"dimensions":{"need":{"score":72,"finding":"2-3 sentence specific finding","recommendations":["...","...","..."]},"goals":{"score":68,"finding":"...","recommendations":["...","...","..."]},"methodology":{"score":81,"finding":"...","recommendations":["...","...","..."]},"evaluation":{"score":55,"finding":"...","recommendations":["...","...","..."]},"budget":{"score":74,"finding":"...","recommendations":["...","...","..."]},"capacity":{"score":79,"finding":"...","recommendations":["...","...","..."]},"equity":{"score":60,"finding":"...","recommendations":["...","...","..."]},"sustainability":{"score":45,"finding":"...","recommendations":["...","...","..."]}},"executive_summary":"3-4 sentence overall assessment","top_3_strengths":["...","...","..."],"critical_gaps":["...","...","..."],"reviewer_verdict":"One sentence bottom-line recommendation","revision_priority_order":["need","goals","methodology","evaluation","budget","capacity","equity","sustainability"]}`;
+
+  try{
+    const res=await fetch("https://api.anthropic.com/v1/messages",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:2000,system:sys,messages:[{role:"user",content:`Grant type: ${gtype}\n\nAPPLICATION:\n${text.slice(0,12000)}\n\nScore rigorously and specifically.`}]})});
+    clearInterval(loadInterval);
+    const data=await res.json();
+    const raw=(data.content||[]).find(b=>b.type==='text')?.text||'';
+    const parsed=JSON.parse(raw.replace(/```json|```/g,'').trim());
+    showResults(parsed);
+  }catch(e){
+    clearInterval(loadInterval);
+    document.getElementById('loading-view').style.display='none';
+    document.getElementById('input-view').style.display='block';
+    err.textContent='Scoring failed. Please try again.';err.style.display='block';
+  }
+}
+
+function showResults(scores){
+  document.getElementById('loading-view').style.display='none';
+  let total=0;
+  DIMS.forEach(d=>{total+=((scores.dimensions[d.id]?.score||0)*d.weight)/100;});
+  total=Math.round(total);
+  const tier=getTier(total);
+  let html=`
+    <div class="score-header">
+      <svg width="120" height="120" viewBox="0 0 100 100">
+        <circle cx="50" cy="50" r="46" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="7"/>
+        <circle cx="50" cy="50" r="46" fill="none" stroke="${tier.color}" stroke-width="7" stroke-dasharray="${(total/100)*2*Math.PI*46} ${2*Math.PI*46}" stroke-linecap="round" transform="rotate(-90 50 50)"/>
+        <text x="50" y="46" text-anchor="middle" fill="${tier.color}" font-size="18" font-weight="800" font-family="'Courier New',monospace">${total}</text>
+        <text x="50" y="60" text-anchor="middle" fill="rgba(255,255,255,0.4)" font-size="7" font-family="'Courier New',monospace">/ 100</text>
+      </svg>
+      <div>
+        <div style="font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:3px;margin-bottom:4px">COMPOSITE SCORE</div>
+        <div class="total-score" style="color:${tier.color}">${total}<span style="font-size:18px;color:rgba(255,255,255,0.3)">/100</span></div>
+        <span class="tier-badge" style="background:${tier.bg};border:1px solid ${tier.border};color:${tier.color}">${tier.label}</span>
+      </div>
+      <div style="margin-left:auto"><button class="btn-sec" onclick="resetTool()">← NEW ANALYSIS</button></div>
+    </div>
+    <div class="verdict-card" style="background:${tier.bg};border:1px solid ${tier.border}">
+      <div class="verdict-label" style="color:${tier.color}">REVIEWER VERDICT</div>
+      <div class="verdict-text">${scores.reviewer_verdict}</div>
+    </div>
+    <div class="card">
+      <div class="label">Executive Assessment</div>
+      <div style="font-size:12px;color:rgba(255,255,255,0.7);line-height:1.75">${scores.executive_summary}</div>
+    </div>
+    <div class="two-col">
+      <div class="card" style="background:rgba(0,208,132,0.04);border-color:rgba(0,208,132,0.2)">
+        <div class="label" style="color:#00d084">Top Strengths</div>
+        ${(scores.top_3_strengths||[]).map(s=>`<div class="list-item" style="border-left:2px solid rgba(0,208,132,0.4);padding-left:12px">+ ${s}</div>`).join('')}
+      </div>
+      <div class="card" style="background:rgba(245,101,101,0.04);border-color:rgba(245,101,101,0.2)">
+        <div class="label" style="color:#f56565">Critical Gaps</div>
+        ${(scores.critical_gaps||[]).map(g=>`<div class="list-item" style="border-left:2px solid rgba(245,101,101,0.4);padding-left:12px">! ${g}</div>`).join('')}
+      </div>
+    </div>
+    <div class="card">
+      <div class="label">Score Breakdown</div>
+      ${DIMS.map(d=>{const raw=scores.dimensions[d.id]?.score||0,w=(raw*d.weight)/100,p=Math.round((w/d.weight)*100),t=getTier(raw);return`<div class="bar-wrap"><div class="bar-label"><span>${d.icon} ${d.label} <span style="font-size:9px;color:rgba(255,255,255,0.3)">${d.weight}%</span></span><span style="color:${t.color}">${w.toFixed(1)}/${d.weight}</span></div><div class="bar-track"><div class="bar-fill" style="width:${p}%;background:${t.color}"></div></div></div>`;}).join('')}
+    </div>
+    <div class="label" style="margin-bottom:12px">Detailed Dimension Analysis</div>
+    <div class="dim-grid">
+      ${DIMS.map(d=>{const data=scores.dimensions[d.id]||{},raw=data.score||0,t=getTier(raw);return`<div class="dim-card"><div class="dim-name">${d.icon} ${d.label}</div><div class="dim-score" style="color:${t.color}">${raw}<span style="font-size:13px;color:rgba(255,255,255,0.25)">/100</span></div><span class="dim-tier" style="background:${t.bg};color:${t.color};border:1px solid ${t.border}">${t.label}</span><div class="dim-finding">${data.finding||''}</div>${(data.recommendations||[]).length?`<div class="rec-title">Priority Revisions</div>${data.recommendations.map((r,i)=>`<div class="rec-item">${i+1}. ${r}</div>`).join('')}`:''}</div>`;}).join('')}
+    </div>
+    ${scores.revision_priority_order?`<div class="card"><div class="label">Recommended Revision Order</div><div class="revision-pills">${scores.revision_priority_order.map((id,i)=>{const d=DIMS.find(x=>x.id===id);if(!d)return'';const t=getTier(scores.dimensions[id]?.score||0);return`<span class="rev-pill" style="background:${t.bg};border:1px solid ${t.border};color:${t.color}"><span style="color:rgba(255,255,255,0.3);margin-right:4px">${i+1}.</span>${d.label.toUpperCase()}</span>`;}).join('')}</div></div>`:''}
+    <div style="text-align:center;padding:32px 0">
+      <button class="btn" onclick="resetTool()">SCORE ANOTHER APPLICATION →</button>
+    </div>`;
+  const rv=document.getElementById('results-view');
+  rv.innerHTML=html;rv.style.display='block';
+}
+
+function resetTool(){
+  document.getElementById('results-view').style.display='none';
+  document.getElementById('results-view').innerHTML='';
+  document.getElementById('input-view').style.display='block';
+  document.getElementById('app-text').value='';
+  document.getElementById('char-count').textContent='0 CHARACTERS';
+}
+</script>
+</body>
+</html>
