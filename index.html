@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GrantScore Pro — Know Your Score Before You Submit</title>
@@ -85,7 +86,6 @@ select option{background:#1a1a2e;color:#fff}
 </head>
 <body>
 <div class="grid"></div>
-
 <div class="header">
   <div><span class="logo">GRANTSCORE<span>PRO</span></span></div>
   <div class="nav">
@@ -95,10 +95,7 @@ select option{background:#1a1a2e;color:#fff}
   </div>
   <span style="font-size:10px;color:rgba(255,255,255,0.2);letter-spacing:1px">FEDERAL · PRIVATE · STATE · COMMUNITY</span>
 </div>
-
 <div class="main">
-
-  <!-- SCORE PAGE -->
   <div id="page-score" class="page active">
     <div id="input-view">
       <div style="margin-bottom:40px"><div style="margin-bottom:20px"><button class="btn-sec" onclick="showPage('howto')" style="font-size:11px;padding:8px 16px;border-color:rgba(59,158,255,0.3);color:#3b9eff">NEW HERE? SEE HOW IT WORKS →</button></div>
@@ -141,147 +138,41 @@ select option{background:#1a1a2e;color:#fff}
     </div>
     <div class="results" id="results-view"></div>
   </div>
-
-  <!-- HOW TO PAGE -->
   <div id="page-howto" class="page">
     <div class="hero-title" style="margin-bottom:8px">How to use<br><span>GrantScore Pro</span></div>
     <p class="hero-sub">Five steps from first draft to confident submission.</p>
-
-    <div class="step-card">
-      <div class="step-num">1</div>
-      <div>
-        <div class="step-title">SELECT YOUR GRANT TYPE</div>
-        <div class="step-body">Choose from Federal (NOFO/RFP), State Agency, Private Foundation, Corporate/CSR, Community Foundation, or Capacity Building. This calibrates the scoring criteria to match how that specific funder type evaluates applications. Federal grants are scored against 2 CFR Part 200 compliance standards. State grants are evaluated against nonprofit governance credibility. Foundation grants weight narrative and mission alignment more heavily.</div>
-      </div>
-    </div>
-
-    <div class="step-card">
-      <div class="step-num">2</div>
-      <div>
-        <div class="step-title">PASTE YOUR COMPLETE APPLICATION</div>
-        <div class="step-body">Copy and paste your full grant narrative — including your statement of need, goals and objectives, program design and methodology, evaluation plan, budget justification, and organizational capacity section. The more complete your text, the more precise your score. Minimum 200 characters required. You can also paste a letter of inquiry (LOI) or a draft — you don't have to be finished to benefit from scoring.</div>
-      </div>
-    </div>
-
-    <div class="step-card">
-      <div class="step-num">3</div>
-      <div>
-        <div class="step-title">CLICK "SCORE APPLICATION"</div>
-        <div class="step-body">GrantScore Pro analyzes your application across 8 weighted dimensions using AI trained on federal review criteria and nonprofit governance standards. Analysis takes 15–30 seconds. You'll see a live progress indicator as each dimension is evaluated.</div>
-      </div>
-    </div>
-
-    <div class="step-card">
-      <div class="step-num">4</div>
-      <div>
-        <div class="step-title">REVIEW YOUR RESULTS</div>
-        <div class="step-body">You'll receive a composite score (0–100), a dimension-by-dimension breakdown with weighted scores, specific reviewer findings for each area, 3 priority revision recommendations per dimension, your top 3 strengths, critical gaps, a reviewer verdict, and a recommended revision order starting with your weakest dimensions.</div>
-      </div>
-    </div>
-
-    <div class="step-card">
-      <div class="step-num">5</div>
-      <div>
-        <div class="step-title">REVISE AND RESCORE</div>
-        <div class="step-body">Use the feedback to strengthen your weakest dimensions first — the revision priority order tells you exactly where to start. Then paste your revised application and score again. Most users run 2–3 scoring rounds before reaching the Fundable or Competitive tier. Click "Score Another Application" to start a new analysis at any time.</div>
-      </div>
-    </div>
-
+    <div class="step-card"><div class="step-num">1</div><div><div class="step-title">SELECT YOUR GRANT TYPE</div><div class="step-body">Choose from Federal (NOFO/RFP), State Agency, Private Foundation, Corporate/CSR, Community Foundation, or Capacity Building. This calibrates the scoring criteria to match how that specific funder type evaluates applications. Federal grants are scored against 2 CFR Part 200 compliance standards. State grants are evaluated against nonprofit governance credibility. Foundation grants weight narrative and mission alignment more heavily.</div></div></div>
+    <div class="step-card"><div class="step-num">2</div><div><div class="step-title">PASTE YOUR COMPLETE APPLICATION</div><div class="step-body">Copy and paste your full grant narrative — including your statement of need, goals and objectives, program design and methodology, evaluation plan, budget justification, and organizational capacity section. The more complete your text, the more precise your score. Minimum 200 characters required. You can also paste a letter of inquiry (LOI) or a draft — you don't have to be finished to benefit from scoring.</div></div></div>
+    <div class="step-card"><div class="step-num">3</div><div><div class="step-title">CLICK "SCORE APPLICATION"</div><div class="step-body">GrantScore Pro analyzes your application across 8 weighted dimensions using AI trained on federal review criteria and nonprofit governance standards. Analysis takes 15–30 seconds. You'll see a live progress indicator as each dimension is evaluated.</div></div></div>
+    <div class="step-card"><div class="step-num">4</div><div><div class="step-title">REVIEW YOUR RESULTS</div><div class="step-body">You'll receive a composite score (0–100), a dimension-by-dimension breakdown with weighted scores, specific reviewer findings for each area, 3 priority revision recommendations per dimension, your top 3 strengths, critical gaps, a reviewer verdict, and a recommended revision order starting with your weakest dimensions.</div></div></div>
+    <div class="step-card"><div class="step-num">5</div><div><div class="step-title">REVISE AND RESCORE</div><div class="step-body">Use the feedback to strengthen your weakest dimensions first — the revision priority order tells you exactly where to start. Then paste your revised application and score again. Most users run 2–3 scoring rounds before reaching the Fundable or Competitive tier. Click "Score Another Application" to start a new analysis at any time.</div></div></div>
     <div class="section-title" style="margin-top:40px">Score tiers explained</div>
     <div class="tier-row">
-      <div class="tier-card" style="background:rgba(0,208,132,0.08);border:1px solid rgba(0,208,132,0.25)">
-        <div style="font-size:16px;font-weight:900;color:#00d084">90–100</div>
-        <div style="font-size:10px;color:#00d084;margin-top:2px;letter-spacing:1.5px;font-weight:800">FUNDABLE</div>
-        <div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:8px;line-height:1.6">Strong across all dimensions. Submit with confidence. Address any remaining flags as time allows.</div>
-      </div>
-      <div class="tier-card" style="background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.25)">
-        <div style="font-size:16px;font-weight:900;color:#3b9eff">75–89</div>
-        <div style="font-size:10px;color:#3b9eff;margin-top:2px;letter-spacing:1.5px;font-weight:800">COMPETITIVE</div>
-        <div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:8px;line-height:1.6">Solid foundation with identifiable gaps. Address the top 2–3 flagged areas before submitting.</div>
-      </div>
-      <div class="tier-card" style="background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.25)">
-        <div style="font-size:16px;font-weight:900;color:#f0b429">60–74</div>
-        <div style="font-size:10px;color:#f0b429;margin-top:2px;letter-spacing:1.5px;font-weight:800">NEEDS REVISION</div>
-        <div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:8px;line-height:1.6">Multiple weak dimensions. Follow the full revision priority order before submitting.</div>
-      </div>
-      <div class="tier-card" style="background:rgba(245,101,101,0.08);border:1px solid rgba(245,101,101,0.25)">
-        <div style="font-size:16px;font-weight:900;color:#f56565">0–59</div>
-        <div style="font-size:10px;color:#f56565;margin-top:2px;letter-spacing:1.5px;font-weight:800">MAJOR REWORK</div>
-        <div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:8px;line-height:1.6">Significant structural issues across multiple areas. Do not submit without comprehensive revision.</div>
-      </div>
+      <div class="tier-card" style="background:rgba(0,208,132,0.08);border:1px solid rgba(0,208,132,0.25)"><div style="font-size:16px;font-weight:900;color:#00d084">90–100</div><div style="font-size:10px;color:#00d084;margin-top:2px;letter-spacing:1.5px;font-weight:800">FUNDABLE</div><div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:8px;line-height:1.6">Strong across all dimensions. Submit with confidence.</div></div>
+      <div class="tier-card" style="background:rgba(59,158,255,0.08);border:1px solid rgba(59,158,255,0.25)"><div style="font-size:16px;font-weight:900;color:#3b9eff">75–89</div><div style="font-size:10px;color:#3b9eff;margin-top:2px;letter-spacing:1.5px;font-weight:800">COMPETITIVE</div><div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:8px;line-height:1.6">Solid foundation. Address top 2–3 flagged areas.</div></div>
+      <div class="tier-card" style="background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.25)"><div style="font-size:16px;font-weight:900;color:#f0b429">60–74</div><div style="font-size:10px;color:#f0b429;margin-top:2px;letter-spacing:1.5px;font-weight:800">NEEDS REVISION</div><div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:8px;line-height:1.6">Multiple weak dimensions. Follow full revision order.</div></div>
+      <div class="tier-card" style="background:rgba(245,101,101,0.08);border:1px solid rgba(245,101,101,0.25)"><div style="font-size:16px;font-weight:900;color:#f56565">0–59</div><div style="font-size:10px;color:#f56565;margin-top:2px;letter-spacing:1.5px;font-weight:800">MAJOR REWORK</div><div style="font-size:10px;color:rgba(255,255,255,0.45);margin-top:8px;line-height:1.6">Do not submit without comprehensive revision.</div></div>
     </div>
-
-    <div style="text-align:center;padding:32px 0">
-      <button class="btn" onclick="showPage('score')">START SCORING →</button>
-    </div>
+    <div style="text-align:center;padding:32px 0"><button class="btn" onclick="showPage('score')">START SCORING →</button></div>
   </div>
-
-  <!-- FAQ PAGE -->
   <div id="page-faq" class="page">
     <div class="hero-title" style="margin-bottom:8px">Frequently asked<br><span>questions</span></div>
     <p class="hero-sub">Everything you need to know about GrantScore Pro.</p>
-
     <div class="card" style="padding:8px 24px">
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">What grant types does GrantScore Pro support?<span class="chevron">&#9660;</span></div>
-        <div class="faq-a">GrantScore Pro supports Federal grants (NIH, USDA, HHS, NEA, NEH, DOE, and all NOFO/RFP formats), State agency grants, Private foundation proposals (Ford, Gates, Kellogg, and others), Corporate/CSR applications, Community foundation proposals, and Capacity building grant requests. The scoring criteria automatically adjusts based on the grant type you select so your feedback is specific to how that funder type actually evaluates applications.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">Can GrantScore Pro guarantee I'll win the grant?<span class="chevron">&#9660;</span></div>
-        <div class="faq-a">No — and any tool that makes that claim should be avoided. Funding decisions involve funder priorities, relationships, budget cycles, and competitive pool dynamics that no tool can predict. What GrantScore Pro does is ensure you know exactly where your application is weak before the funder does — so you can fix it. We can't guarantee outcomes. We can guarantee you'll submit a stronger application than you would have otherwise.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">How is this different from hiring a grant consultant?<span class="chevron">&#9660;</span></div>
-        <div class="faq-a">A skilled grant consultant brings funder relationships, sector expertise, and writing talent that GrantScore Pro doesn't replace. What GrantScore Pro offers is immediate, structured, consistent feedback — available at any hour, without a $150–$300/hour consulting fee. Many grant consultants use GrantScore Pro as a first-pass tool before doing their own review. Think of it as a complement to human expertise, not a replacement for it.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">What are the 8 scoring dimensions and their weights?<span class="chevron">&#9660;</span></div>
-        <div class="faq-a">Program Design & Methodology (20%) — evidence-based approach and implementation clarity. Statement of Need (15%) — clarity, urgency, and data-backed problem articulation. Goals & Objectives (15%) — SMART criteria adherence and funder alignment. Evaluation Plan (15%) — data collection rigor and accountability structures. Budget Justification (15%) — cost reasonableness, line-item clarity, and leverage. Organizational Capacity (10%) — track record, leadership, and infrastructure. Equity & Inclusion (5%) — commitment to underrepresented populations. Sustainability (5%) — plan for continuation beyond the grant period.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">Is my application text kept private?<span class="chevron">&#9660;</span></div>
-        <div class="faq-a">Your application text is sent to the AI model for analysis only and is not stored, shared, or used to train future models. We recommend removing any personally identifiable information about program participants before pasting. Do not include Social Security numbers, financial account information, or sensitive personal data about individuals served by your program.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">Can I score the same application multiple times?<span class="chevron">&#9660;</span></div>
-        <div class="faq-a">Yes — and we strongly encourage it. Score your draft, revise the weakest dimensions using the priority order provided, then score again. Repeat until you reach the Fundable or Competitive tier. Most users run 2–3 scoring rounds before submitting a polished application. Each score is independent so you can track your improvement across rounds.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">Does GrantScore Pro work for letters of inquiry (LOIs)?<span class="chevron">&#9660;</span></div>
-        <div class="faq-a">Yes. Paste your LOI text and select the appropriate grant type. The scoring will flag gaps in your problem framing, mission clarity, and organizational credibility — the same elements funders evaluate in an LOI format. Some dimensions will score lower simply because LOIs are shorter, so focus on the specific findings rather than the composite score when reviewing an LOI.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">I'm a grant consultant. Can I use this with my clients?<span class="chevron">&#9660;</span></div>
-        <div class="faq-a">Absolutely. GrantScore Pro is built for practitioners. Grant consultants use it to provide structured first-pass feedback to clients, identify gaps before investing deep revision hours, and deliver a scored report that demonstrates measurable value. If you're interested in a professional or team plan with volume pricing, contact us at grantscorepro.com.</div>
-      </div>
-
-      <div class="faq-item" onclick="toggleFaq(this)">
-        <div class="faq-q">What's coming in future versions?<span class="chevron">&#9660;</span></div>
-        <div class="faq-a">Version 2 will add federal-specific compliance variables including 2 CFR Part 200 alignment, SAM.gov registration flags, and indirect cost rate scoring. Version 3 will add a North Carolina compliance track built on NC General Statutes Chapter 55A governance standards. Future versions will expand state-by-state compliance frameworks across all 50 states and offer enterprise white-label licensing for foundations and government agencies.</div>
-      </div>
-
-      <div class="faq-item" style="border-bottom:none" onclick="toggleFaq(this)">
-        <div class="faq-q">How do I contact GrantScore Pro?<span class="chevron">&#9660;</span></div>
-        <div class="faq-a">For questions, partnership inquiries, or to learn about professional and institutional plans, visit grantscorepro.com or reach out via our social channels @GrantScorePro on Instagram, LinkedIn, Facebook, and X.</div>
-      </div>
-
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What grant types does GrantScore Pro support?<span class="chevron">&#9660;</span></div><div class="faq-a">GrantScore Pro supports Federal grants (NIH, USDA, HHS, NEA, NEH, DOE, and all NOFO/RFP formats), State agency grants, Private foundation proposals, Corporate/CSR applications, Community foundation proposals, and Capacity building grant requests.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Can GrantScore Pro guarantee I'll win the grant?<span class="chevron">&#9660;</span></div><div class="faq-a">No — and any tool that makes that claim should be avoided. What GrantScore Pro does is ensure you know exactly where your application is weak before the funder does — so you can fix it.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">How is this different from hiring a grant consultant?<span class="chevron">&#9660;</span></div><div class="faq-a">A skilled grant consultant brings funder relationships and sector expertise that GrantScore Pro doesn't replace. What GrantScore Pro offers is immediate, structured, consistent feedback — available at any hour, without a $150–$300/hour consulting fee.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What are the 8 scoring dimensions and their weights?<span class="chevron">&#9660;</span></div><div class="faq-a">Program Design & Methodology (20%), Statement of Need (15%), Goals & Objectives (15%), Evaluation Plan (15%), Budget Justification (15%), Organizational Capacity (10%), Equity & Inclusion (5%), Sustainability (5%).</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Is my application text kept private?<span class="chevron">&#9660;</span></div><div class="faq-a">Your application text is sent to the AI model for analysis only and is not stored, shared, or used to train future models.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Can I score the same application multiple times?<span class="chevron">&#9660;</span></div><div class="faq-a">Yes — and we strongly encourage it. Score your draft, revise the weakest dimensions, then score again. Most users run 2–3 scoring rounds before submitting.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">Does GrantScore Pro work for letters of inquiry (LOIs)?<span class="chevron">&#9660;</span></div><div class="faq-a">Yes. Paste your LOI text and select the appropriate grant type. Focus on the specific findings rather than the composite score when reviewing an LOI.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">I'm a grant consultant. Can I use this with my clients?<span class="chevron">&#9660;</span></div><div class="faq-a">Absolutely. GrantScore Pro is built for practitioners. If you're interested in a professional or team plan with volume pricing, contact us at grantscorepro.com.</div></div>
+      <div class="faq-item" onclick="toggleFaq(this)"><div class="faq-q">What's coming in future versions?<span class="chevron">&#9660;</span></div><div class="faq-a">Version 2 adds federal-specific compliance variables. Version 3 adds a North Carolina compliance track built on NC General Statutes Chapter 55A. Future versions expand to all 50 states and enterprise white-label licensing.</div></div>
+      <div class="faq-item" style="border-bottom:none" onclick="toggleFaq(this)"><div class="faq-q">How do I contact GrantScore Pro?<span class="chevron">&#9660;</span></div><div class="faq-a">Visit grantscorepro.com or reach out @GrantScorePro on Instagram, LinkedIn, Facebook, and X.</div></div>
     </div>
-
-    <div style="text-align:center;padding:32px 0">
-      <button class="btn" onclick="showPage('score')">START SCORING →</button>
-    </div>
+    <div style="text-align:center;padding:32px 0"><button class="btn" onclick="showPage('score')">START SCORING →</button></div>
   </div>
-
 </div>
-
 <script>
 const DIMS=[
   {id:"need",label:"Statement of Need",weight:15,icon:"◈",desc:"Clarity, urgency, and evidence-based articulation of the problem"},
@@ -294,14 +185,12 @@ const DIMS=[
   {id:"sustainability",label:"Sustainability",weight:5,icon:"◔",desc:"Plan for continuation beyond grant period"},
 ];
 const LOADING_MSGS=["Parsing grant application structure...","Evaluating statement of need...","Analyzing methodology rigor...","Scoring budget justification...","Checking evaluation framework...","Running equity & sustainability audit...","Calculating weighted composite score...","Generating reviewer recommendations..."];
-
 function getTier(s){
   if(s>=90)return{label:"FUNDABLE",color:"#00d084",bg:"rgba(0,208,132,0.1)",border:"rgba(0,208,132,0.3)"};
   if(s>=75)return{label:"COMPETITIVE",color:"#3b9eff",bg:"rgba(59,158,255,0.1)",border:"rgba(59,158,255,0.3)"};
   if(s>=60)return{label:"NEEDS REVISION",color:"#f0b429",bg:"rgba(240,180,41,0.1)",border:"rgba(240,180,41,0.3)"};
   return{label:"MAJOR REWORK",color:"#f56565",bg:"rgba(245,101,101,0.1)",border:"rgba(245,101,101,0.3)"};
 }
-
 function showPage(name){
   document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
   document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
@@ -309,21 +198,17 @@ function showPage(name){
   document.querySelector('[onclick="showPage(\''+name+'\')"]').classList.add('active');
   window.scrollTo(0,0);
 }
-
 function toggleFaq(el){
   const a=el.querySelector('.faq-a'),c=el.querySelector('.chevron');
   a.classList.toggle('open');c.classList.toggle('open');
 }
-
 document.getElementById('app-text').addEventListener('input',function(){
   document.getElementById('char-count').textContent=this.value.length.toLocaleString()+' CHARACTERS';
 });
-
 const dp=document.getElementById('dim-preview');
 DIMS.forEach(d=>{
   dp.innerHTML+=`<div class="dim-prev-item"><span style="font-size:14px;color:rgba(255,255,255,0.25);flex-shrink:0">${d.icon}</span><div><div class="dim-prev-name">${d.label}<span class="weight-badge">${d.weight}%</span></div><div class="dim-prev-desc">${d.desc}</div></div></div>`;
 });
-
 let loadInterval=null;
 async function runScore(){
   const text=document.getElementById('app-text').value.trim();
@@ -352,7 +237,6 @@ async function runScore(){
     err.textContent='Scoring failed. Please try again.';err.style.display='block';
   }
 }
-
 function showResults(scores){
   document.getElementById('loading-view').style.display='none';
   let total=0;
@@ -407,7 +291,6 @@ function showResults(scores){
   const rv=document.getElementById('results-view');
   rv.innerHTML=html;rv.style.display='block';
 }
-
 function resetTool(){
   document.getElementById('results-view').style.display='none';
   document.getElementById('results-view').innerHTML='';
