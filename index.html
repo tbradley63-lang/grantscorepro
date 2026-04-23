@@ -1,729 +1,833 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=DM+Sans:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GrantScore Pro — Know Your Score Before You Submit</title>
+<title>GrantScore Pro — V2 User Flow</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-html,body{min-height:100vh;background:#0a0a0f;color:#e8e8ec;font-family:'DM Sans','Courier New',sans-serif}
-.grid{position:fixed;top:0;left:0;right:0;bottom:0;background-image:linear-gradient(rgba(255,255,255,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.025) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
-.header{border-bottom:1px solid rgba(255,255,255,0.08);padding:16px 32px;display:flex;align-items:center;justify-content:space-between;position:relative;z-index:10;flex-wrap:wrap;gap:12px}
-.logo{font-size:20px;font-weight:900;color:#fff;letter-spacing:-1px;font-family:'DM Sans',sans-serif}
-.logo em{font-style:normal;font-size:9px;background:#3b9eff;color:#000;padding:2px 6px;border-radius:3px;font-weight:800;letter-spacing:2px;margin-left:6px}
-.logo .v2{font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:1px;margin-left:4px}
-.nav{display:flex;gap:6px;align-items:center}
-.nav-btn{background:transparent;color:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.1);border-radius:6px;padding:6px 14px;font-size:10px;font-family:'DM Sans',sans-serif;font-weight:700;letter-spacing:1.5px;cursor:pointer;text-transform:uppercase;transition:all 0.2s}
-.nav-btn:hover,.nav-btn.active{color:#3b9eff;border-color:rgba(59,158,255,0.4)}
-.uses-badge{font-size:10px;font-weight:700;color:rgba(255,255,255,0.35);letter-spacing:1px;padding:5px 10px;border:1px solid rgba(255,255,255,0.08);border-radius:6px;font-family:'DM Sans',sans-serif}
-.uses-badge.warn{color:#f0b429;border-color:rgba(240,180,41,0.3)}
-.main{max-width:900px;margin:0 auto;padding:36px 24px;position:relative;z-index:10}
-.page{display:none}.page.active{display:block}
-.hero{font-size:32px;font-weight:900;letter-spacing:-1.5px;line-height:1.1;margin-bottom:10px;color:#fff;font-family:'DM Sans',sans-serif}
-.hero span{color:#3b9eff}
-.sub{font-size:13px;color:rgba(255,255,255,0.45);line-height:1.7;margin-bottom:24px;max-width:520px}
-.stats{display:flex;gap:28px;margin-bottom:28px;flex-wrap:wrap}
-.sv{font-size:20px;font-weight:900;color:#3b9eff}.sl{font-size:9px;color:rgba(255,255,255,0.3);letter-spacing:2px;text-transform:uppercase}
-.card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:22px;margin-bottom:16px}
-.lbl{font-size:10px;color:rgba(255,255,255,0.4);letter-spacing:3px;text-transform:uppercase;display:block;margin-bottom:6px;font-family:'DM Sans',sans-serif}
-input,select,textarea{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;padding:11px 14px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;transition:border-color 0.2s}
-input:focus,select:focus,textarea:focus{border-color:rgba(59,158,255,0.4)}
-select{margin-bottom:16px;cursor:pointer}
-textarea{min-height:100px;resize:vertical;line-height:1.6;margin-bottom:16px}
-input{margin-bottom:16px}
-.btn{display:inline-flex;align-items:center;gap:8px;background:#3b9eff;color:#000;border:none;border-radius:8px;padding:13px 26px;font-size:12px;font-family:'DM Sans',sans-serif;font-weight:800;letter-spacing:1px;cursor:pointer;text-transform:uppercase;transition:opacity 0.2s}
-.btn:hover{opacity:0.9}
-.btn-s{background:transparent;color:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:10px 18px;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:700;letter-spacing:1px;cursor:pointer;text-transform:uppercase}
-.btn-s:hover{border-color:rgba(255,255,255,0.3);color:rgba(255,255,255,0.7)}
-.btn-gold{display:inline-flex;align-items:center;gap:8px;background:linear-gradient(135deg,#c9a84c,#f0d080);color:#000;border:none;border-radius:8px;padding:15px 32px;font-size:13px;font-family:'DM Sans',sans-serif;font-weight:800;letter-spacing:1px;cursor:pointer;text-transform:uppercase;transition:opacity 0.2s;width:100%;justify-content:center}
-.btn-gold:hover{opacity:0.9}
-.btn-outline-gold{display:inline-flex;align-items:center;gap:8px;background:transparent;color:#c9a84c;border:1px solid rgba(201,168,76,0.4);border-radius:8px;padding:11px 22px;font-size:11px;font-family:'DM Sans',sans-serif;font-weight:800;letter-spacing:1px;cursor:pointer;text-transform:uppercase;transition:all 0.2s}
-.btn-outline-gold:hover{background:rgba(201,168,76,0.08);border-color:rgba(201,168,76,0.7)}
-.err{background:rgba(245,101,101,0.1);border:1px solid rgba(245,101,101,0.3);border-radius:8px;padding:9px 13px;font-size:12px;color:#f56565;margin-bottom:13px;display:none}
-.step-row{display:flex;align-items:center;margin-bottom:20px;gap:0}
-.step-dot{width:24px;height:24px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:800;flex-shrink:0;transition:all 0.3s}
-.step-dot.done{background:#3b9eff;color:#000}
-.step-dot.active{background:rgba(59,158,255,0.2);color:#3b9eff;border:1px solid rgba(59,158,255,0.5)}
-.step-dot.idle{background:rgba(255,255,255,0.05);color:rgba(255,255,255,0.25);border:1px solid rgba(255,255,255,0.1)}
-.step-lbl{font-size:11px;font-weight:600;margin-left:7px;margin-right:7px}
-.step-lbl.active{color:#fff}
-.step-lbl.done,.step-lbl.idle{color:rgba(255,255,255,0.35)}
-.step-line{flex:1;height:1px;background:rgba(255,255,255,0.08);max-width:32px}
-.dim-wrap{margin-bottom:18px}
-.dim-top{display:flex;justify-content:space-between;margin-bottom:3px}
-.dim-name{font-size:12px;font-weight:700;color:rgba(255,255,255,0.75)}
-.dim-val{font-size:13px;font-weight:800;color:#3b9eff}
-.dim-tip{font-size:10px;color:rgba(255,255,255,0.3);margin-bottom:6px;line-height:1.4}
-input[type=range]{padding:0;margin:0;accent-color:#3b9eff;cursor:pointer;height:18px}
-.band-chip{display:inline-block;padding:3px 11px;border-radius:20px;font-size:9px;font-weight:800;letter-spacing:1.5px;margin-top:6px}
-.bar-row{margin-bottom:10px}
-.bar-top{display:flex;justify-content:space-between;font-size:11px;color:rgba(255,255,255,0.55);margin-bottom:4px}
-.bar-track{height:4px;background:rgba(255,255,255,0.07);border-radius:2px;overflow:hidden}
-.bar-fill{height:100%;border-radius:2px}
-.tab-row{display:flex;border-bottom:1px solid rgba(255,255,255,0.08);margin-bottom:16px;gap:0}
-.tab{padding:8px 16px;font-size:10px;font-weight:700;font-family:'DM Sans',sans-serif;letter-spacing:1.5px;cursor:pointer;color:rgba(255,255,255,0.4);border:none;border-bottom:2px solid transparent;background:transparent;text-transform:uppercase}
-.tab.active{color:#fff;border-bottom-color:#3b9eff}
-.check-item{display:flex;align-items:center;gap:10px;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.05);font-size:12px}
-.gap-card{background:rgba(255,255,255,0.03);border-radius:8px;padding:13px;margin-bottom:10px}
-.gap-title{display:flex;justify-content:space-between;font-size:12px;font-weight:700;color:#fff;margin-bottom:4px}
-.gap-pts{font-size:10px;color:#f0b429;font-weight:700}
-.gap-desc{font-size:11px;color:rgba(255,255,255,0.45);line-height:1.5}
-.share-box{background:rgba(255,255,255,0.04);border:1px solid rgba(255,255,255,0.1);border-radius:8px;padding:14px;font-size:13px;font-style:italic;color:rgba(255,255,255,0.65);line-height:1.6;margin-bottom:14px}
-.funder-row{display:flex;justify-content:space-between;align-items:flex-start;padding:12px 0;border-bottom:1px solid rgba(255,255,255,0.05)}
-.funder-name{font-size:13px;font-weight:700;color:#fff}
-.funder-focus{font-size:11px;color:rgba(255,255,255,0.4);margin-top:2px}
-.funder-dl{font-size:11px;color:#3b9eff;font-weight:600;flex-shrink:0;margin-left:12px;padding-top:2px}
-.search-inp{width:100%;background:rgba(255,255,255,0.05);border:1px solid rgba(255,255,255,0.12);border-radius:8px;color:#fff;padding:11px 14px;font-size:13px;font-family:'DM Sans',sans-serif;outline:none;margin-bottom:16px}
-.search-inp:focus{border-color:rgba(59,158,255,0.4)}
-.cal-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.cal-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:16px}
-.cal-q{font-size:11px;font-weight:800;color:#3b9eff;letter-spacing:1px;margin-bottom:10px;text-transform:uppercase}
-.cal-ev{font-size:11px;color:rgba(255,255,255,0.5);padding:6px 0;border-bottom:1px solid rgba(255,255,255,0.04);line-height:1.4}
-.cal-ev:last-child{border-bottom:none}
-.loading-wrap{text-align:center;padding:70px 24px}
-.spinner{width:44px;height:44px;border-radius:50%;border:2px solid rgba(59,158,255,0.2);border-top-color:#3b9eff;animation:spin 0.9s linear infinite;margin:0 auto 20px}
-@keyframes spin{to{transform:rotate(360deg)}}
-.loading-title{font-size:24px;font-weight:900;color:#fff;margin-bottom:10px}
-.loading-msg{font-size:11px;color:#3b9eff;letter-spacing:2px}
-.two{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:16px}
-select option{background:#1a1a2e;color:#fff}
-.grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.social-row{background:rgba(255,255,255,0.03);border-radius:8px;padding:13px;margin-bottom:14px}
+  @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:ital,wght@0,300;0,400;0,500;0,600;1,300&display=swap');
 
-/* MODALS */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity 0.3s}
-.modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:#111118;border:1px solid rgba(201,168,76,0.3);border-radius:16px;padding:40px 36px;max-width:520px;width:100%;position:relative;box-shadow:0 0 80px rgba(201,168,76,0.08)}
-.modal-crown{font-size:36px;text-align:center;margin-bottom:16px}
-.modal-title{font-size:26px;font-weight:900;letter-spacing:-1px;color:#fff;text-align:center;margin-bottom:6px;font-family:'DM Sans',sans-serif}
-.modal-title span{color:#c9a84c}
-.modal-sub{font-size:12px;color:rgba(255,255,255,0.4);text-align:center;line-height:1.6;margin-bottom:24px}
-.modal-divider{height:1px;background:linear-gradient(90deg,transparent,rgba(201,168,76,0.3),transparent);margin-bottom:24px}
-.modal-features{margin-bottom:28px}
-.modal-feat{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:12px;color:rgba(255,255,255,0.65)}
-.modal-feat-icon{width:18px;height:18px;border-radius:50%;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);display:flex;align-items:center;justify-content:center;font-size:9px;color:#c9a84c;flex-shrink:0}
-.modal-tiers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
-.tier-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px;cursor:pointer;transition:all 0.2s;text-align:center}
-.tier-card:hover,.tier-card.selected{border-color:rgba(201,168,76,0.5);background:rgba(201,168,76,0.06)}
-.tier-name{font-size:10px;font-weight:800;letter-spacing:1.5px;color:rgba(255,255,255,0.5);text-transform:uppercase;margin-bottom:4px}
-.tier-price{font-size:20px;font-weight:900;color:#c9a84c;letter-spacing:-1px}
-.tier-desc{font-size:9px;color:rgba(255,255,255,0.3);margin-top:3px;line-height:1.4}
-.modal-note{font-size:10px;color:rgba(255,255,255,0.25);text-align:center;margin-top:14px;line-height:1.5}
+  :root {
+    --navy:   #1B2D4F;
+    --navy2:  #243d6a;
+    --gold:   #C9A84C;
+    --gold2:  #e8c76a;
+    --white:  #FFFFFF;
+    --off:    #F7F8FB;
+    --gray:   #6B7280;
+    --light:  #EEF1F7;
+    --green:  #2D7A4F;
+    --red:    #C0392B;
+    --amber:  #D97706;
+  }
 
-/* EMAIL GATE MODAL */
-.email-modal{background:#111118;border:1px solid rgba(59,158,255,0.25);border-radius:16px;padding:40px 36px;max-width:440px;width:100%;box-shadow:0 0 80px rgba(59,158,255,0.06)}
-.email-modal-icon{font-size:40px;text-align:center;margin-bottom:16px}
-.email-modal-title{font-size:24px;font-weight:900;letter-spacing:-1px;color:#fff;text-align:center;margin-bottom:8px;font-family:'DM Sans',sans-serif}
-.email-modal-title span{color:#3b9eff}
-.email-modal-sub{font-size:12px;color:rgba(255,255,255,0.4);text-align:center;line-height:1.6;margin-bottom:24px}
-.email-modal input{margin-bottom:10px}
-.email-modal .btn{width:100%;justify-content:center;margin-bottom:0}
-.email-err{background:rgba(245,101,101,0.1);border:1px solid rgba(245,101,101,0.3);border-radius:6px;padding:8px 12px;font-size:11px;color:#f56565;margin-bottom:10px;display:none}
-.skip-link{display:block;text-align:center;margin-top:12px;font-size:10px;color:rgba(255,255,255,0.25);cursor:pointer;letter-spacing:1px;text-transform:uppercase}
-.skip-link:hover{color:rgba(255,255,255,0.45)}
+  * { box-sizing: border-box; margin: 0; padding: 0; }
 
-/* REPORT EMAIL BOX */
-.report-email-box{background:rgba(59,158,255,0.06);border:1px solid rgba(59,158,255,0.2);border-radius:10px;padding:16px 18px;margin-bottom:16px}
-.report-email-title{font-size:11px;font-weight:800;color:#3b9eff;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
-.report-email-sub{font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:12px;line-height:1.5}
-.report-email-row{display:flex;gap:8px;flex-wrap:wrap}
-.report-email-row input{margin-bottom:0;flex:1;min-width:160px}
-.report-email-sent{font-size:12px;color:#00c47a;font-weight:700;display:none;padding:8px 0}
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: #F0F3F9;
+    color: var(--navy);
+    min-height: 100vh;
+  }
 
-/* WARN BANNER */
-.warn-banner{background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.25);border-radius:8px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
-.warn-banner-txt{font-size:11px;color:#f0b429;font-weight:600}
-.warn-banner-cta{font-size:10px;color:#f0b429;font-weight:800;letter-spacing:1px;cursor:pointer;text-decoration:underline;white-space:nowrap;background:none;border:none}
+  /* ── HEADER ── */
+  header {
+    background: var(--navy);
+    padding: 28px 48px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--gold);
+  }
+  .logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 22px;
+    font-weight: 900;
+    color: var(--white);
+    letter-spacing: 0.04em;
+  }
+  .logo span { color: var(--gold); }
+  .doc-meta {
+    font-size: 12px;
+    color: rgba(255,255,255,0.55);
+    text-align: right;
+    line-height: 1.7;
+  }
+  .doc-meta strong { color: var(--gold); }
 
-@media(max-width:600px){.two,.grid-2,.cal-grid,.modal-tiers{grid-template-columns:1fr}.step-lbl{display:none}.modal,.email-modal{padding:28px 20px}.report-email-row{flex-direction:column}}
+  /* ── MAIN CONTAINER ── */
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 48px 32px 80px;
+  }
+
+  /* ── INTRO ── */
+  .intro {
+    margin-bottom: 52px;
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 32px;
+    align-items: end;
+  }
+  .intro h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 36px;
+    font-weight: 900;
+    color: var(--navy);
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .intro h1 em { color: var(--gold); font-style: normal; }
+  .intro p {
+    font-size: 15px;
+    color: var(--gray);
+    font-weight: 300;
+    max-width: 560px;
+    line-height: 1.7;
+  }
+  .version-badge {
+    background: var(--navy);
+    color: var(--gold);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    padding: 6px 14px;
+    border-radius: 4px;
+    white-space: nowrap;
+    text-transform: uppercase;
+  }
+
+  /* ── LEGEND ── */
+  .legend {
+    display: flex;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+    padding: 16px 24px;
+    background: white;
+    border-radius: 8px;
+    border: 1px solid #DDE3EE;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 12px;
+    color: var(--gray);
+    font-weight: 500;
+  }
+  .legend-dot {
+    width: 12px; height: 12px;
+    border-radius: 50%;
+    flex-shrink: 0;
+  }
+  .ld-entry   { background: var(--navy); }
+  .ld-input   { background: #2D6FA8; }
+  .ld-engine  { background: #7B3FA0; }
+  .ld-output  { background: var(--green); }
+  .ld-branch  { background: var(--amber); }
+  .ld-resource{ background: var(--gray); }
+  .legend-line {
+    width: 24px; height: 2px;
+    flex-shrink: 0;
+  }
+  .ll-arrow { background: var(--navy); }
+  .ll-branch { background: var(--amber); border-top: 2px dashed var(--amber); background: transparent; }
+
+  /* ── FLOW WRAPPER ── */
+  .flow {
+    position: relative;
+  }
+
+  /* ── STAGE LABELS ── */
+  .stage-row {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 0;
+    margin-bottom: 0;
+  }
+  .stage-label {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: rgba(27,45,79,0.35);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 0;
+    border-right: 2px solid #DDE3EE;
+    margin-right: 24px;
+  }
+
+  /* ── STEP CARDS ── */
+  .step-group {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .step-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 0;
+    position: relative;
+    margin-bottom: 0;
+  }
+
+  .step-connector-col {
+    width: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex-shrink: 0;
+    padding-top: 28px;
+  }
+
+  .step-number {
+    width: 36px; height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 700;
+    color: white;
+    flex-shrink: 0;
+    z-index: 2;
+    position: relative;
+  }
+
+  .connector-line {
+    width: 2px;
+    flex: 1;
+    min-height: 24px;
+    background: #CBD5E0;
+  }
+  .connector-line.gold { background: var(--gold); }
+  .connector-line.dashed {
+    background: repeating-linear-gradient(to bottom, var(--amber) 0, var(--amber) 4px, transparent 4px, transparent 8px);
+    width: 2px;
+  }
+
+  .step-card {
+    flex: 1;
+    background: white;
+    border-radius: 12px;
+    border: 1px solid #DDE3EE;
+    padding: 22px 26px;
+    margin-bottom: 8px;
+    margin-top: 12px;
+    position: relative;
+    transition: box-shadow 0.2s, transform 0.2s;
+    cursor: default;
+  }
+  .step-card:hover {
+    box-shadow: 0 8px 32px rgba(27,45,79,0.12);
+    transform: translateY(-1px);
+  }
+  .step-card.entry   { border-left: 4px solid var(--navy); }
+  .step-card.input   { border-left: 4px solid #2D6FA8; }
+  .step-card.engine  { border-left: 4px solid #7B3FA0; }
+  .step-card.output  { border-left: 4px solid var(--green); }
+  .step-card.branch  { border-left: 4px solid var(--amber); }
+  .step-card.resource{ border-left: 4px solid var(--gray); }
+
+  .step-card-header {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 12px;
+    margin-bottom: 10px;
+  }
+  .step-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--navy);
+    line-height: 1.2;
+  }
+  .module-badge {
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    padding: 3px 8px;
+    border-radius: 3px;
+    white-space: nowrap;
+    flex-shrink: 0;
+    text-transform: uppercase;
+  }
+  .mb-entry   { background: #E8EDF5; color: var(--navy); }
+  .mb-input   { background: #E5F0FB; color: #1A4F7A; }
+  .mb-engine  { background: #F3EAF9; color: #5A1F80; }
+  .mb-output  { background: #E3F5EC; color: #1A5C36; }
+  .mb-branch  { background: #FEF3C7; color: #92400E; }
+  .mb-resource{ background: #F3F4F6; color: #374151; }
+
+  .step-desc {
+    font-size: 13.5px;
+    color: #4B5563;
+    line-height: 1.65;
+    margin-bottom: 12px;
+    font-weight: 300;
+  }
+
+  .step-points {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+  }
+  .step-point {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 12.5px;
+    color: #6B7280;
+    font-weight: 400;
+    line-height: 1.5;
+  }
+  .step-point::before {
+    content: '›';
+    color: var(--gold);
+    font-size: 15px;
+    font-weight: 700;
+    line-height: 1.2;
+    flex-shrink: 0;
+  }
+
+  /* ── BRANCH CARDS ── */
+  .branch-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin: 0 0 8px 104px;
+  }
+  .branch-card {
+    background: white;
+    border-radius: 10px;
+    padding: 18px 20px;
+    border: 1px solid #DDE3EE;
+    position: relative;
+  }
+  .branch-card.yes { border-top: 3px solid var(--green); }
+  .branch-card.no  { border-top: 3px solid var(--amber); }
+  .branch-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 6px;
+  }
+  .branch-card.yes .branch-label { color: var(--green); }
+  .branch-card.no  .branch-label { color: var(--amber); }
+  .branch-card h4 {
+    font-family: 'Playfair Display', serif;
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--navy);
+    margin-bottom: 6px;
+  }
+  .branch-card p {
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+
+  /* ── SCORE BANDS ── */
+  .score-bands {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 10px;
+    margin: 0 0 8px 104px;
+  }
+  .score-band {
+    border-radius: 8px;
+    padding: 14px 16px;
+    border: 1px solid #DDE3EE;
+  }
+  .score-band .range {
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Playfair Display', serif;
+    margin-bottom: 4px;
+  }
+  .score-band .verdict {
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 6px;
+  }
+  .score-band p { font-size: 11.5px; color: var(--gray); line-height: 1.5; font-weight: 300; }
+  .sb-a { border-top: 3px solid var(--green); }
+  .sb-a .range, .sb-a .verdict { color: var(--green); }
+  .sb-b { border-top: 3px solid #3B82F6; }
+  .sb-b .range, .sb-b .verdict { color: #1D4ED8; }
+  .sb-c { border-top: 3px solid var(--amber); }
+  .sb-c .range, .sb-c .verdict { color: var(--amber); }
+  .sb-d { border-top: 3px solid var(--red); }
+  .sb-d .range, .sb-d .verdict { color: var(--red); }
+
+  /* ── SECTION DIVIDER ── */
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 36px 0 24px;
+  }
+  .section-divider span {
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--gray);
+    white-space: nowrap;
+    padding: 0 4px;
+  }
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: #DDE3EE;
+  }
+
+  /* ── RESOURCE GRID ── */
+  .resource-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 14px;
+    margin-bottom: 32px;
+  }
+  .resource-card {
+    background: white;
+    border-radius: 10px;
+    border: 1px solid #DDE3EE;
+    padding: 18px 20px;
+    border-top: 3px solid var(--gray);
+  }
+  .resource-card h4 {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--navy);
+    margin-bottom: 4px;
+  }
+  .resource-card p {
+    font-size: 12px;
+    color: var(--gray);
+    line-height: 1.6;
+    font-weight: 300;
+  }
+  .resource-card .mod-tag {
+    font-size: 10px;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--navy);
+    color: rgba(255,255,255,0.45);
+    text-align: center;
+    font-size: 11.5px;
+    padding: 20px 32px;
+    letter-spacing: 0.04em;
+    border-top: 3px solid var(--gold);
+  }
+  footer strong { color: var(--gold); }
+
+  /* ── PRINT ── */
+  @media print {
+    body { background: white; }
+    .step-card:hover { transform: none; box-shadow: none; }
+  }
 </style>
 </head>
 <body>
-<div class="grid"></div>
 
-<!-- EMAIL GATE MODAL -->
-<div class="modal-overlay" id="email-gate-modal">
-  <div class="email-modal">
-    <div class="email-modal-icon">📊</div>
-    <div class="email-modal-title">Be one of the <span>first 50.</span></div>
-    <p class="email-modal-sub">GrantScore Pro is free for our first 50 users — unlimited scoring, no credit card, no commitment. Just smarter grant decisions.</p>
-    <div id="email-err" class="email-err">Please enter a valid email address.</div>
-    <label class="lbl">Email Address</label>
-    <input id="gate-email" type="email" placeholder="you@yourorg.org" />
-    <label class="lbl">Organization Name</label>
-    <input id="gate-org" placeholder="e.g. Little Sprouts Nutrition" style="margin-bottom:16px" />
-    <button class="btn" onclick="submitEmailGate()">Unlock My Free Scores →</button>
-    <span class="skip-link" onclick="skipEmailGate()">Skip for now</span>
+<header>
+  <div class="logo">GRANTSCORE <span>PRO</span></div>
+  <div class="doc-meta">
+    <strong>GSP-UF-001</strong> · V2 User Flow Wireframe<br>
+    April 20, 2026 · Terri Bradley, Founder
   </div>
-</div>
+</header>
 
-<!-- UPGRADE MODAL -->
-<div class="modal-overlay" id="upgrade-modal">
-  <div class="modal">
-    <div class="modal-crown">⚡</div>
-    <div class="modal-title">You've hit <span>50 free scores.</span></div>
-    <p class="modal-sub">You've been doing the work. Upgrade to GrantScore Pro and keep your momentum — unlimited scoring, full report history, and funder intelligence tools.</p>
-    <div class="modal-divider"></div>
-    <div class="modal-features">
-      <div class="modal-feat"><div class="modal-feat-icon">✓</div>Unlimited grant scoring — no caps</div>
-      <div class="modal-feat"><div class="modal-feat-icon">✓</div>Full 7-dimension readiness reports</div>
-      <div class="modal-feat"><div class="modal-feat-icon">✓</div>NC Funder Directory + Grant Calendar</div>
-      <div class="modal-feat"><div class="modal-feat-icon">✓</div>Score history & exportable reports</div>
-      <div class="modal-feat"><div class="modal-feat-icon">✓</div>Priority access to V3 Funder Intelligence</div>
+<div class="container">
+
+  <div class="intro">
+    <div>
+      <h1>V2 User Flow<br><em>From Landing to Action</em></h1>
+      <p>This document maps every decision point and user touchpoint in the GrantScore Pro V2 platform — from first arrival through scored results, branching readiness paths, and standing resource access. Built for developer handoff.</p>
     </div>
-    <div class="modal-tiers">
-      <div class="tier-card selected" id="tier-pro" onclick="selectTier('pro')">
-        <div class="tier-name">Pro</div>
-        <div class="tier-price">$19<span style="font-size:11px;font-weight:600;color:rgba(201,168,76,0.6)">/mo</span></div>
-        <div class="tier-desc">Solo grant writer or small nonprofit</div>
-      </div>
-      <div class="tier-card" id="tier-team" onclick="selectTier('team')">
-        <div class="tier-name">Team</div>
-        <div class="tier-price">$49<span style="font-size:11px;font-weight:600;color:rgba(201,168,76,0.6)">/mo</span></div>
-        <div class="tier-desc">Up to 5 users — ED + board + staff</div>
-      </div>
-      <div class="tier-card" id="tier-agency" onclick="selectTier('agency')">
-        <div class="tier-name">Agency</div>
-        <div class="tier-price">$149<span style="font-size:11px;font-weight:600;color:rgba(201,168,76,0.6)">/mo</span></div>
-        <div class="tier-desc">Consultants managing multiple nonprofits</div>
-      </div>
-    </div>
-    <button class="btn-gold" id="upgrade-cta" onclick="handleUpgrade()">Unlock Full Access →</button>
-    <p class="modal-note">Powered by Stripe. Cancel anytime. Questions? hello@grantscorepro.com</p>
-  </div>
-</div>
-
-<div class="header">
-  <div class="logo">GRANTSCORE<em>PRO</em><span class="v2">V2</span></div>
-  <div class="nav">
-    <button class="nav-btn active" onclick="showPage('score',this)">Score a Grant</button>
-    <button class="nav-btn" onclick="showPage('funders',this)">Funder Directory</button>
-    <button class="nav-btn" onclick="showPage('calendar',this)">Grant Calendar</button>
-    <button class="nav-btn" onclick="openUpgradeModal()" style="color:rgba(201,168,76,0.7);border-color:rgba(201,168,76,0.25)">Upgrade Pro</button>
-  </div>
-</div>
-
-<div class="main">
-
-  <div id="pg-score" class="page active">
-
-    <!-- INPUT VIEW -->
-    <div id="vw-input">
-      <div class="step-row">
-        <div class="step-dot active">1</div><span class="step-lbl active">Input</span>
-        <div class="step-line"></div>
-        <div class="step-dot idle">2</div><span class="step-lbl idle">Readiness</span>
-        <div class="step-line"></div>
-        <div class="step-dot idle">3</div><span class="step-lbl idle">Results</span>
-      </div>
-      <div class="hero">Know your score<br><span>before you submit.</span></div>
-      <p class="sub">Grant intelligence across 7 weighted dimensions with NC-first funder data.</p>
-      <div class="stats">
-        <div><div class="sv">7</div><div class="sl">Dimensions</div></div>
-        <div><div class="sv">100pt</div><div class="sl">Scale</div></div>
-        <div><div class="sv">NC-First</div><div class="sl">Funder Data</div></div>
-      </div>
-      <div id="err1" class="err">Please fill in organization name, funder name, and request amount.</div>
-      <div class="card">
-        <div class="grid-2" style="margin-bottom:0">
-          <div>
-            <label class="lbl">Organization Name</label>
-            <input id="orgName" placeholder="e.g. Little Sprouts Nutrition & Enrichment" />
-          </div>
-          <div>
-            <label class="lbl">Funder / Grant Name</label>
-            <input id="funderName" placeholder="e.g. Z. Smith Reynolds Foundation" />
-          </div>
-          <div>
-            <label class="lbl">Grant Type</label>
-            <select id="grantType">
-              <option>Community Foundation</option>
-              <option>Corporate / CSR</option>
-              <option>Federal</option>
-              <option>State / County</option>
-              <option>Faith-Based</option>
-              <option>Private Family Foundation</option>
-              <option>United Way</option>
-              <option>Arts / Culture</option>
-              <option>Health & Human Services</option>
-              <option>Education</option>
-            </select>
-          </div>
-          <div>
-            <label class="lbl">Request Amount ($)</label>
-            <input id="askAmt" type="number" placeholder="25000" />
-          </div>
-        </div>
-        <label class="lbl">Funder's Stated Priorities</label>
-        <textarea id="priorities" placeholder="Paste from their website — what do they fund? Who do they serve?"></textarea>
-        <label class="lbl">Your Mission Statement</label>
-        <textarea id="mission" placeholder="1–2 sentences describing your organization's purpose..." style="min-height:80px"></textarea>
-        <button class="btn" onclick="goReadiness()">Continue to Readiness Assessment →</button>
-      </div>
-    </div>
-
-    <!-- READINESS VIEW -->
-    <div id="vw-readiness" style="display:none">
-      <div class="step-row">
-        <div class="step-dot done">✓</div><span class="step-lbl done">Input</span>
-        <div class="step-line"></div>
-        <div class="step-dot active">2</div><span class="step-lbl active">Readiness</span>
-        <div class="step-line"></div>
-        <div class="step-dot idle">3</div><span class="step-lbl idle">Results</span>
-      </div>
-      <p class="sub" style="margin-bottom:16px">Rate your organization honestly across 7 weighted dimensions.</p>
-      <div class="card" id="sliders-wrap"></div>
-      <div class="social-row">
-        <label class="lbl" style="margin-bottom:8px">Marketing / Social Audit — Active website + social channels?</label>
-        <select id="socialAudit" style="margin-bottom:0">
-          <option value="strong">Yes — strong presence</option>
-          <option value="partial">Partial</option>
-          <option value="weak">Minimal / none</option>
-        </select>
-      </div>
-      <div style="display:flex;gap:10px">
-        <button class="btn-s" onclick="goBack()">← Back</button>
-        <button class="btn" onclick="calcScore()">Calculate Score →</button>
-      </div>
-    </div>
-
-    <!-- LOADING VIEW -->
-    <div id="vw-loading" style="display:none">
-      <div class="loading-wrap">
-        <div class="spinner"></div>
-        <div class="loading-title">SCORING</div>
-        <div class="loading-msg" id="load-msg">Analyzing mission alignment...</div>
-      </div>
-    </div>
-
-    <!-- RESULTS VIEW -->
-    <div id="vw-results" style="display:none"></div>
-
+    <div class="version-badge">Version 2.0 Scope</div>
   </div>
 
-  <!-- FUNDER DIRECTORY -->
-  <div id="pg-funders" class="page">
-    <div class="hero" style="font-size:26px;margin-bottom:6px">NC Funder Directory</div>
-    <p class="sub" style="margin-bottom:16px">North Carolina funders — search by name or focus area.</p>
-    <input class="search-inp" id="funder-search" placeholder="Search name or focus area..." oninput="filterFunders()" />
-    <div id="funder-list"></div>
+  <div class="legend">
+    <div class="legend-item"><div class="legend-dot ld-entry"></div> Entry / Landing</div>
+    <div class="legend-item"><div class="legend-dot ld-input"></div> Intelligence Input</div>
+    <div class="legend-item"><div class="legend-dot ld-engine"></div> Scoring Engine</div>
+    <div class="legend-item"><div class="legend-dot ld-output"></div> Results & Output</div>
+    <div class="legend-item"><div class="legend-dot ld-branch"></div> Decision Branch</div>
+    <div class="legend-item"><div class="legend-dot ld-resource"></div> Standing Resource</div>
   </div>
 
-  <!-- GRANT CALENDAR -->
-  <div id="pg-calendar" class="page">
-    <div class="hero" style="font-size:26px;margin-bottom:6px">Grant Season Calendar</div>
-    <p class="sub" style="margin-bottom:18px">Strategic timing for NC and federal grant submissions.</p>
-    <div class="cal-grid" id="cal-grid"></div>
+  <!-- ═══════════════════════════════════════════════
+       STAGE 1 — LANDING
+  ═══════════════════════════════════════════════ -->
+  <div class="section-divider"><span>Stage 1 · Landing</span></div>
+
+  <div class="step-row">
+    <div class="step-connector-col">
+      <div class="step-number" style="background:var(--navy);">1</div>
+      <div class="connector-line gold"></div>
+    </div>
+    <div class="step-card entry">
+      <div class="step-card-header">
+        <div class="step-title">Landing Page — First Impression</div>
+        <div class="module-badge mb-entry">Entry Point</div>
+      </div>
+      <div class="step-desc">User arrives via search, referral, social share, or partner link. The landing page establishes the platform's promise in one screen: honest grant readiness scoring — not a calculator, a preparation platform.</div>
+      <div class="step-points">
+        <div class="step-point">Hero copy and value proposition above the fold</div>
+        <div class="step-point">Social proof: score share examples, beta partner badge (United Way)</div>
+        <div class="step-point">Single primary CTA: <strong>"Score Your Application"</strong></div>
+        <div class="step-point">Secondary navigation: Grant Type Library · Funder Directory · Compliance Calendar</div>
+        <div class="step-point">No login required to begin — frictionless entry into scoring flow</div>
+      </div>
+    </div>
   </div>
 
-</div>
+  <!-- ═══════════════════════════════════════════════
+       STAGE 2 — INTELLIGENCE INPUT
+  ═══════════════════════════════════════════════ -->
+  <div class="section-divider"><span>Stage 2 · Intelligence Input</span></div>
 
-<script>
-// CONFIG
-const FREE_LIMIT = 50;
-const STORAGE_KEY = 'gsp_score_count';
-const EMAIL_KEY = 'gsp_user_email';
-const ORG_KEY = 'gsp_user_org';
-const GATE_KEY = 'gsp_gate_done';
-
-// Google Form entry IDs
-const FORM_BASE = 'https://docs.google.com/forms/d/e/1FAIpQLSfBZMjWkhpo1ZA2OhNkZhGQW6DyjZgghkpexuM46z0_on8tXw/formResponse';
-const ENTRY_EMAIL = 'entry.64683268';
-const ENTRY_SCORE = 'entry.666362287';
-const ENTRY_ORG   = 'entry.1144984992';
-const ENTRY_COMMENT = 'entry.1655417842';
-
-// Stripe Payment Links
-const STRIPE_LINKS = {
-  pro:    'https://buy.stripe.com/6oU28ra7i1px4s9fzE8Vi00',
-  team:   'https://buy.stripe.com/bJedR93IU2tB0bT9bg8Vi01',
-  agency: 'https://buy.stripe.com/dRm28r1AM1px2k14V08Vi02'
-};
-
-// USAGE HELPERS
-function getCount(){ return parseInt(localStorage.getItem(STORAGE_KEY)||'0',10); }
-function incrementCount(){ localStorage.setItem(STORAGE_KEY, getCount()+1); }
-function isLocked(){ return getCount() >= FREE_LIMIT; }
-function remaining(){ return Math.max(0, FREE_LIMIT - getCount()); }
-function getSavedEmail(){ return localStorage.getItem(EMAIL_KEY)||''; }
-function getSavedOrg(){ return localStorage.getItem(ORG_KEY)||''; }
-
-// GOOGLE FORM SUBMIT
-function submitToGoogleForm(email, org, score, comment){
-  const params = new URLSearchParams();
-  params.append(ENTRY_EMAIL, email||'');
-  params.append(ENTRY_ORG, org||'');
-  params.append(ENTRY_SCORE, score||'');
-  params.append(ENTRY_COMMENT, comment||'');
-  fetch(FORM_BASE, {
-    method: 'POST',
-    mode: 'no-cors',
-    headers: {'Content-Type':'application/x-www-form-urlencoded'},
-    body: params.toString()
-  }).catch(()=>{});
-}
-
-// EMAIL GATE
-function checkEmailGate(){
-  if(!localStorage.getItem(GATE_KEY)){
-    document.getElementById('email-gate-modal').classList.add('open');
-  }
-}
-
-function submitEmailGate(){
-  const email = document.getElementById('gate-email').value.trim();
-  const org = document.getElementById('gate-org').value.trim();
-  const errEl = document.getElementById('email-err');
-  if(!email || !email.includes('@')){
-    errEl.style.display='block';
-    return;
-  }
-  errEl.style.display='none';
-  localStorage.setItem(EMAIL_KEY, email);
-  localStorage.setItem(ORG_KEY, org);
-  localStorage.setItem(GATE_KEY, '1');
-  submitToGoogleForm(email, org, 'signup', 'New user registration');
-  document.getElementById('email-gate-modal').classList.remove('open');
-}
-
-function skipEmailGate(){
-  localStorage.setItem(GATE_KEY, '1');
-  document.getElementById('email-gate-modal').classList.remove('open');
-}
-
-// UPGRADE MODAL
-let selectedTier = 'pro';
-function selectTier(t){
-  selectedTier = t;
-  document.querySelectorAll('.tier-card').forEach(c=>c.classList.remove('selected'));
-  document.getElementById('tier-'+t).classList.add('selected');
-}
-function openUpgradeModal(){
-  document.getElementById('upgrade-modal').classList.add('open');
-}
-function closeUpgradeModal(){
-  document.getElementById('upgrade-modal').classList.remove('open');
-}
-function handleUpgrade(){
-  const url = STRIPE_LINKS[selectedTier];
-  if(url) window.open(url, '_blank');
-}
-document.getElementById('upgrade-modal').addEventListener('click', function(e){
-  if(e.target === this) closeUpgradeModal();
-});
-
-// USAGE BADGE
-function updateUsageBadge(){
-  const r = remaining();
-  const badge = document.getElementById('uses-badge');
-  const banner = document.getElementById('warn-banner');
-  const bannerTxt = document.getElementById('warn-banner-txt');
-  if(isLocked()){
-    badge.textContent = 'LIMIT REACHED';
-    badge.className = 'uses-badge warn';
-    return;
-  }
-  badge.textContent = r + ' free scores left';
-  badge.className = r <= 10 ? 'uses-badge warn' : 'uses-badge';
-  if(r <= 10 && r > 0){
-    banner.style.display = 'flex';
-    bannerTxt.textContent = `⚠ ${r} free score${r===1?'':'s'} remaining — upgrade to keep going.`;
-  } else {
-    banner.style.display = 'none';
-  }
-}
-
-// DIMS & DATA
-const DIMS=[
-  {key:"mission",label:"Mission Alignment",weight:0.25,tip:"How closely does your mission match the funder's stated priorities?"},
-  {key:"capacity",label:"Org Capacity",weight:0.20,tip:"Staff, systems, and bandwidth to execute and report."},
-  {key:"track",label:"Track Record",weight:0.18,tip:"Demonstrated outcomes and history of successful grant management."},
-  {key:"budget",label:"Budget Fit",weight:0.15,tip:"Your request aligns with funder's typical grant range."},
-  {key:"narrative",label:"Narrative Strength",weight:0.12,tip:"Clarity, urgency, and specificity of your case for support."},
-  {key:"relationships",label:"Funder Relationship",weight:0.06,tip:"Prior contact, site visits, or warm introduction."},
-  {key:"compliance",label:"Compliance Readiness",weight:0.04,tip:"990s current, registration active, determination letter on file."},
-];
-
-const TIPS_BY_DIM = {
-  mission: "Rewrite your mission statement to mirror the funder's exact language and priority areas.",
-  capacity: "Document your staffing plan and reporting systems — funders fund organizations, not just programs.",
-  track: "Pull 2–3 quantified outcomes from prior work. Numbers beat narratives every time.",
-  budget: "Research the funder's typical grant range and right-size your ask to match their pattern.",
-  narrative: "Lead with the problem, not your organization. Make the need undeniable in the first paragraph.",
-  relationships: "Request a pre-submission call or site visit before submitting. One conversation is worth ten cold applications.",
-  compliance: "Get your 990, determination letter, and charitable registration current before submitting anything."
-};
-
-const FUNDERS=[
-  {name:"Z. Smith Reynolds Foundation",focus:"NC general",deadline:"Rolling"},
-  {name:"Duke Endowment",focus:"Health, education, rural NC",deadline:"LOI required"},
-  {name:"Triangle Community Foundation",focus:"Triangle region",deadline:"Quarterly"},
-  {name:"United Way of Wayne County",focus:"Local impact — Wayne County",deadline:"Spring / Fall"},
-  {name:"Kate B. Reynolds Charitable Trust",focus:"Health, poverty",deadline:"LOI required"},
-  {name:"NC Arts Council",focus:"Arts & culture",deadline:"Annual"},
-  {name:"Golden LEAF Foundation",focus:"Rural NC economy",deadline:"Quarterly"},
-  {name:"Community Foundation of NC",focus:"Statewide",deadline:"Rolling"},
-  {name:"Cemala Foundation",focus:"Greensboro-area education & community",deadline:"LOI required"},
-  {name:"Cannon Foundation",focus:"NC human services, education, health",deadline:"Rolling"},
-  {name:"Lyndhurst Foundation",focus:"Chattanooga + SE US",deadline:"Invitation only"},
-];
-
-const SEASONS=[
-  {q:"Q1 (Jan–Mar)",events:["Federal LOIs open (many programs)","United Way spring cycle opens","NC Arts Council Letters of Inquiry","Foundation spring cycles begin"]},
-  {q:"Q2 (Apr–Jun)",events:["Community foundation spring deadlines","Hey Helen Grant (April 30)","State agency FY close — watch carryover","Golden LEAF spring cycle"]},
-  {q:"Q3 (Jul–Sep)",events:["New federal FY begins Oct 1 — prep now","Corporate CSR budgets finalize","Fall cycle LOIs open","Z. Smith Reynolds rolling review"]},
-  {q:"Q4 (Oct–Dec)",events:["United Way fall cycle","Year-end corporate giving surge","Federal grant season peaks","NC DHHS & DHSS cycles close"]},
-];
-
-let readiness={};
-
-function getBand(s){
-  if(s>=85)return{label:"COMPETITIVE",color:"#00c47a",bg:"rgba(0,196,122,0.12)",border:"rgba(0,196,122,0.3)"};
-  if(s>=70)return{label:"VIABLE",color:"#3b9eff",bg:"rgba(59,158,255,0.12)",border:"rgba(59,158,255,0.3)"};
-  if(s>=55)return{label:"MARGINAL",color:"#f0b429",bg:"rgba(240,180,41,0.12)",border:"rgba(240,180,41,0.3)"};
-  return{label:"NOT READY",color:"#f56565",bg:"rgba(245,101,101,0.12)",border:"rgba(245,101,101,0.3)"};
-}
-
-function showPage(name,btn){
-  document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));
-  document.querySelectorAll('.nav-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('pg-'+name).classList.add('active');
-  if(btn)btn.classList.add('active');
-  window.scrollTo(0,0);
-}
-
-function buildSliders(){
-  const w=document.getElementById('sliders-wrap');
-  w.innerHTML='';
-  DIMS.forEach(d=>{
-    const v=readiness[d.key]??5;
-    w.innerHTML+=`<div class="dim-wrap">
-      <div class="dim-top">
-        <span class="dim-name">${d.label} <span style="font-size:9px;color:rgba(255,255,255,0.3);font-weight:400">${Math.round(d.weight*100)}% weight</span></span>
-        <span class="dim-val" id="dv-${d.key}">${v}</span>
-      </div>
-      <div class="dim-tip">${d.tip}</div>
-      <input type="range" min="0" max="10" value="${v}" step="1" style="width:100%;margin-bottom:4px" oninput="setDim('${d.key}',this.value)" />
-      <div style="display:flex;justify-content:space-between;font-size:9px;color:rgba(255,255,255,0.2)"><span>Weak</span><span>Strong</span></div>
-    </div>`;
-  });
-}
-
-function setDim(k,v){readiness[k]=Number(v);document.getElementById('dv-'+k).textContent=v;}
-
-function goReadiness(){
-  const o=document.getElementById('orgName').value.trim();
-  const f=document.getElementById('funderName').value.trim();
-  const a=document.getElementById('askAmt').value.trim();
-  const e=document.getElementById('err1');
-  if(!o||!f||!a){e.style.display='block';return;}
-  e.style.display='none';
-  DIMS.forEach(d=>{if(readiness[d.key]===undefined)readiness[d.key]=5;});
-  buildSliders();
-  document.getElementById('vw-input').style.display='none';
-  document.getElementById('vw-readiness').style.display='block';
-  window.scrollTo(0,0);
-}
-
-function goBack(){
-  document.getElementById('vw-readiness').style.display='none';
-  document.getElementById('vw-input').style.display='block';
-  window.scrollTo(0,0);
-}
-
-function calcScore(){
-  document.getElementById('vw-readiness').style.display='none';
-  document.getElementById('vw-loading').style.display='block';
-  window.scrollTo(0,0);
-  const msgs=["Analyzing mission alignment...","Weighting org capacity...","Checking track record...","Scoring budget fit...","Evaluating narrative strength...","Calculating composite score...","Generating readiness report..."];
-  let i=0;const ml=document.getElementById('load-msg');
-  const t=setInterval(()=>{i++;ml.textContent=msgs[i%msgs.length];},700);
-  setTimeout(()=>{clearInterval(t);showResults();},2600);
-}
-
-function computeScore(){
-  let raw=DIMS.reduce((s,d)=>s+(readiness[d.key]??5)*d.weight,0);
-  return Math.min(100,Math.max(0,Math.round((raw/10)*100)));
-}
-
-function sendReportEmail(score, band, org, funder){
-  const emailInput = document.getElementById('report-email-input');
-  const sentMsg = document.getElementById('report-email-sent');
-  const btn = document.getElementById('report-email-btn');
-  const email = emailInput ? emailInput.value.trim() : getSavedEmail();
-  if(!email || !email.includes('@')){
-    if(emailInput) emailInput.style.borderColor='rgba(245,101,101,0.5)';
-    return;
-  }
-  if(emailInput) emailInput.style.borderColor='rgba(255,255,255,0.12)';
-  const weakDims = DIMS.filter(d=>(readiness[d.key]??5)<7).sort((a,b)=>b.weight-a.weight).slice(0,3);
-  const tipsText = weakDims.map((d,i)=>`Tip ${i+1} — ${d.label}: ${TIPS_BY_DIM[d.key]}`).join(' | ');
-  const comment = `Score: ${score} | Band: ${band} | Funder: ${funder} | Top tips: ${tipsText}`;
-  submitToGoogleForm(email, org, String(score), comment);
-  if(btn) btn.style.display='none';
-  if(emailInput) emailInput.style.display='none';
-  if(sentMsg){sentMsg.style.display='block';sentMsg.textContent=`✓ Report sent to ${email}`;}
-  localStorage.setItem(EMAIL_KEY, email);
-}
-
-function showResults(){
-  document.getElementById('vw-loading').style.display='none';
-  const score=computeScore();
-  const b=getBand(score);
-  const ready=score>=70;
-  const org=document.getElementById('orgName').value.trim();
-  const funder=document.getElementById('funderName').value.trim();
-  const gtype=document.getElementById('grantType').value;
-  const ask=document.getElementById('askAmt').value;
-  const social=document.getElementById('socialAudit').value;
-  const savedEmail=getSavedEmail();
-  const r=52,circ=2*Math.PI*r,dash=(score/100)*circ;
-  const topWeakForTips=DIMS.filter(d=>(readiness[d.key]??5)<7).sort((a,c)=>c.weight-a.weight).slice(0,3);
-  const checklist=[
-    {item:"IRS Determination Letter on file",done:(readiness.compliance??5)>=7},
-    {item:"990 or 990-N filed and current",done:(readiness.compliance??5)>=6},
-    {item:"NC Charitable Solicitation Registration active",done:(readiness.compliance??5)>=7},
-    {item:"Board-approved budget for current year",done:(readiness.capacity??5)>=6},
-    {item:"Program outcome data documented",done:(readiness.track??5)>=6},
-    {item:"Active website and social presence",done:social==='strong'},
-    {item:"Cover letter drafted",done:false},
-    {item:"Letters of support secured",done:false},
-    {item:"Budget narrative prepared",done:false},
-  ];
-  const remNote=`<div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);border-radius:8px;padding:9px 14px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
-    <span style="font-size:11px;color:rgba(201,168,76,0.7)">✦ Free access — unlimited scoring while you're in our first 50.</span>
-    <span style="font-size:10px;color:rgba(201,168,76,0.5);cursor:pointer;text-decoration:underline" onclick="openUpgradeModal()">See Pro features →</span>
-  </div>`;
-  const reportEmailBox=`<div class="report-email-box">
-    <div class="report-email-title">📧 Email My Report</div>
-    <div class="report-email-sub">Get your score summary + top improvement tips sent to your inbox.</div>
-    <div class="report-email-row">
-      <input id="report-email-input" type="email" placeholder="${savedEmail||'you@yourorg.org'}" value="${savedEmail}" style="margin-bottom:0" />
-      <button class="btn" id="report-email-btn" onclick="sendReportEmail(${score},'${b.label.replace(/'/g,"\\'")}','${org.replace(/'/g,"\\'")}','${funder.replace(/'/g,"\\'")}')">Send Report →</button>
+  <div class="step-row">
+    <div class="step-connector-col">
+      <div class="step-number" style="background:#2D6FA8;">2</div>
+      <div class="connector-line"></div>
     </div>
-    <div id="report-email-sent" class="report-email-sent"></div>
-  </div>`;
-
-  let html=`
-    <div class="step-row">
-      <div class="step-dot done">✓</div><span class="step-lbl done">Input</span>
-      <div class="step-line"></div>
-      <div class="step-dot done">✓</div><span class="step-lbl done">Readiness</span>
-      <div class="step-line"></div>
-      <div class="step-dot done" style="background:#3b9eff;color:#000">✓</div><span class="step-lbl active">Results</span>
-    </div>
-    ${remNote}
-    ${reportEmailBox}
-    <div style="display:flex;gap:24px;align-items:flex-start;margin-bottom:22px;flex-wrap:wrap">
-      <div style="text-align:center">
-        <svg width="120" height="120" style="transform:rotate(-90deg)">
-          <circle cx="60" cy="60" r="${r}" fill="none" stroke="rgba(255,255,255,0.07)" stroke-width="9"/>
-          <circle cx="60" cy="60" r="${r}" fill="none" stroke="${b.color}" stroke-width="9"
-            stroke-dasharray="${dash.toFixed(1)} ${circ.toFixed(1)}" stroke-linecap="round"/>
-        </svg>
-        <div style="margin-top:-68px;position:relative;z-index:1">
-          <div style="font-size:36px;font-weight:900;color:${b.color};line-height:1">${score}</div>
-          <div style="font-size:10px;color:rgba(255,255,255,0.3);margin-top:2px">/ 100</div>
-        </div>
-        <div style="margin-top:46px">
-          <span class="band-chip" style="background:${b.bg};color:${b.color};border:1px solid ${b.border}">${b.label}</span>
-        </div>
+    <div class="step-card input">
+      <div class="step-card-header">
+        <div class="step-title">Grantor Intelligence — Module 01</div>
+        <div class="module-badge mb-input">Input Layer</div>
       </div>
-      <div style="flex:1;min-width:200px">
-        <div style="font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:4px">${org} → ${funder}</div>
-        <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:14px">${gtype} · $${Number(ask).toLocaleString()} request</div>
-        <div style="padding:13px 16px;border-radius:10px;background:${ready?'rgba(0,196,122,0.1)':'rgba(240,180,41,0.1)'};border-left:4px solid ${ready?'#00c47a':'#f0b429'}">
-          <div style="font-size:12px;font-weight:800;color:${ready?'#00c47a':'#f0b429'};margin-bottom:4px">${ready?'✓ READY TRACK':'⚠ READINESS PATH'}</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.5">${ready?'Score clears submission threshold. Proceed with application prep.':'Address the gaps below before submitting. A premature application can close future doors with this funder.'}</div>
-        </div>
+      <div class="step-desc">Before the application is scored, the user establishes funder context. This is the single highest-leverage input — it transforms a generic score into a calibrated one. User enters funder information via a structured, 5-field form.</div>
+      <div class="step-points">
+        <div class="step-point">Funder mission statement and stated values (free text)</div>
+        <div class="step-point">Grant type selector: operations / program / capital / capacity building / emergency / seed / prize / corporate</div>
+        <div class="step-point">Funding priorities and geographic focus</div>
+        <div class="step-point">Eligibility restrictions (optional)</div>
+        <div class="step-point">Average grant size range (optional — used for budget calibration)</div>
       </div>
     </div>
-    <div class="tab-row">
-      <button class="tab active" onclick="switchTab('overview',this)">OVERVIEW</button>
-      <button class="tab" onclick="switchTab('checklist',this)">CHECKLIST</button>
-      <button class="tab" onclick="switchTab('path',this)">PATH</button>
-      <button class="tab" onclick="switchTab('share',this)">SHARE</button>
+  </div>
+
+  <div class="step-row">
+    <div class="step-connector-col">
+      <div class="step-number" style="background:#2D6FA8;">3</div>
+      <div class="connector-line"></div>
     </div>
-    <div id="tab-overview">
-      ${DIMS.map(d=>{const v=readiness[d.key]??5;const c=v>=7?'#00c47a':v>=5?'#c9a84c':'#f56565';return`<div class="bar-row"><div class="bar-top"><span>${d.label}</span><span style="color:${c}">${v}/10 <span style="color:rgba(255,255,255,0.25);font-size:9px">${Math.round(d.weight*100)}% weight</span></span></div><div class="bar-track"><div class="bar-fill" style="width:${v*10}%;background:${c}"></div></div></div>`;}).join('')}
+    <div class="step-card input">
+      <div class="step-card-header">
+        <div class="step-title">Organizational Readiness Assessment — Module 02</div>
+        <div class="module-badge mb-input">Input Layer</div>
+      </div>
+      <div class="step-desc">The user self-assesses their organization across the dimensions funders evaluate before reading an application. Structured checklist format — fast to complete, honest in output.</div>
+      <div class="step-points">
+        <div class="step-point">IRS compliance: 990 current, determination letter on file</div>
+        <div class="step-point">State registration: charitable solicitation active</div>
+        <div class="step-point">Financial documents: audit, review, or compilation on hand</div>
+        <div class="step-point">Board governance: roster current, COI policy adopted</div>
+        <div class="step-point">Digital presence: website active, contact info current</div>
+        <div class="step-point">Marketing presence: social platforms active, photos/videos published, press or testimonials</div>
+        <div class="step-point">Program documentation: logic model and evaluation framework on file</div>
+      </div>
     </div>
-    <div id="tab-checklist" style="display:none">
-      <p style="font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:12px">Pre-submission checklist based on your inputs.</p>
-      ${checklist.map(c=>`<div class="check-item"><span style="font-size:16px;color:${c.done?'#00c47a':'#f56565'};min-width:20px">${c.done?'✓':'✗'}</span><span style="color:${c.done?'rgba(255,255,255,0.55)':'#fff'};font-weight:${c.done?400:600}">${c.item}</span></div>`).join('')}
+  </div>
+
+  <div class="step-row">
+    <div class="step-connector-col">
+      <div class="step-number" style="background:#2D6FA8;">4</div>
+      <div class="connector-line"></div>
     </div>
-    <div id="tab-path" style="display:none">
-      ${topWeakForTips.length===0
-        ?'<p style="color:#00c47a;font-weight:700;font-size:13px;padding:12px 0">All dimensions are strong. Proceed with confidence.</p>'
-        :`<p style="font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:12px">Your highest-impact improvements, ranked by scoring weight.</p>
-        ${topWeakForTips.map((d,i)=>`<div class="gap-card"><div class="gap-title"><span>${i+1}. ${d.label}</span><span class="gap-pts">+${Math.round(d.weight*100)} pts potential</span></div><div class="gap-desc" style="margin-bottom:6px">${d.tip}</div><div style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.5;background:rgba(59,158,255,0.06);border-left:2px solid #3b9eff;padding:6px 10px;border-radius:0 4px 4px 0">→ ${TIPS_BY_DIM[d.key]}</div></div>`).join('')}`
-      }
-      <div style="margin-top:12px;padding:12px 15px;background:rgba(59,158,255,0.08);border-radius:8px;border-left:3px solid #3b9eff;font-size:11px;color:rgba(255,255,255,0.55)">Address these gaps then re-run GrantScore Pro before submitting.</div>
+    <div class="step-card input">
+      <div class="step-card-header">
+        <div class="step-title">Application Text Input — Module 03 Setup</div>
+        <div class="module-badge mb-input">Input Layer</div>
+      </div>
+      <div class="step-desc">User pastes or uploads the grant application narrative. Each scored dimension has a labeled text field or the user submits the full narrative for AI parsing. Clear character guidance per field ensures input quality.</div>
+      <div class="step-points">
+        <div class="step-point">Statement of Need field</div>
+        <div class="step-point">Goals and Objectives field</div>
+        <div class="step-point">Program Design and Methodology field</div>
+        <div class="step-point">Evaluation Plan field</div>
+        <div class="step-point">Budget Narrative field</div>
+        <div class="step-point">Organizational Capacity field</div>
+        <div class="step-point">Progress indicator: shows completion before scoring is triggered</div>
+      </div>
     </div>
-    <div id="tab-share" style="display:none">
-      <p style="font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:12px">Share your readiness score with your board, ED, or funders.</p>
-      <div class="share-box">"I scored ${score}/100 on GrantScore Pro — ${b.label} for the ${funder} grant. grantscorepro.vercel.app"</div>
-      <button class="btn" id="copy-btn" onclick="copyShare(${score},'${b.label.replace(/'/g,"\\'")}','${funder.replace(/'/g,"\\'")}')">Copy to Clipboard</button>
-      <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:12px">Attach your GrantScore report in funder correspondence to signal organizational maturity.</p>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       STAGE 3 — SCORING ENGINE
+  ═══════════════════════════════════════════════ -->
+  <div class="section-divider"><span>Stage 3 · Scoring Engine</span></div>
+
+  <div class="step-row">
+    <div class="step-connector-col">
+      <div class="step-number" style="background:#7B3FA0;">5</div>
+      <div class="connector-line"></div>
     </div>
-    <div style="display:flex;gap:10px;margin-top:24px;flex-wrap:wrap">
-      <button class="btn-s" onclick="editReadiness()">← Edit Assessment</button>
-      <button class="btn-s" onclick="resetAll()">Score Another Grant</button>
-    </div>`;
+    <div class="step-card engine">
+      <div class="step-card-header">
+        <div class="step-title">Funder Fit Score Generated — Module 01 Output</div>
+        <div class="module-badge mb-engine">Engine</div>
+      </div>
+      <div class="step-desc">The engine generates a Funder Fit Score (0–100) based on alignment between the organization's profile and the grantor intelligence inputs. This score runs before the application score and gates the scoring experience.</div>
+      <div class="step-points">
+        <div class="step-point">Fit Score displayed prominently with plain-language interpretation</div>
+        <div class="step-point">If Fit Score is below 60: advisory surfaced — "Review funder alignment before proceeding"</div>
+        <div class="step-point">User may proceed or return to revise grantor inputs</div>
+        <div class="step-point">Fit Score remains visible throughout the scoring session as a context anchor</div>
+      </div>
+    </div>
+  </div>
 
-  const rv=document.getElementById('vw-results');
-  rv.innerHTML=html;
-  rv.style.display='block';
-  window.scrollTo(0,0);
-}
+  <div class="step-row">
+    <div class="step-connector-col">
+      <div class="step-number" style="background:#7B3FA0;">6</div>
+      <div class="connector-line"></div>
+    </div>
+    <div class="step-card engine">
+      <div class="step-card-header">
+        <div class="step-title">Application Scored — Module 03 Engine</div>
+        <div class="module-badge mb-engine">Engine</div>
+      </div>
+      <div class="step-desc">The AI scoring engine evaluates all seven application dimensions using weighted criteria calibrated to the grant type and funder profile. Scores are not inflated. Each dimension receives a sub-score and specific, actionable feedback.</div>
+      <div class="step-points">
+        <div class="step-point">Seven dimensions scored with individual weights applied</div>
+        <div class="step-point">Each dimension: sub-score + 2–3 sentence specific feedback (what works, what is missing, what to fix)</div>
+        <div class="step-point">Readiness profile gaps incorporated into overall score weighting</div>
+        <div class="step-point">Composite score calculated with breakdown visible</div>
+      </div>
+    </div>
+  </div>
 
-function switchTab(name,btn){
-  ['overview','checklist','path','share'].forEach(t=>{
-    const el=document.getElementById('tab-'+t);
-    if(el)el.style.display=t===name?'block':'none';
-  });
-  document.querySelectorAll('.tab').forEach(b=>b.classList.remove('active'));
-  if(btn)btn.classList.add('active');
-}
+  <!-- ═══════════════════════════════════════════════
+       STAGE 4 — RESULTS
+  ═══════════════════════════════════════════════ -->
+  <div class="section-divider"><span>Stage 4 · Results</span></div>
 
-function copyShare(score,label,funder){
-  const text=`I scored ${score}/100 on GrantScore Pro — ${label} for the ${funder} grant. grantscorepro.vercel.app`;
-  navigator.clipboard.writeText(text).catch(()=>{});
-  const btn=document.getElementById('copy-btn');
-  if(btn){btn.textContent='✓ Copied!';setTimeout(()=>{btn.textContent='Copy to Clipboard';},2000);}
-}
+  <div class="step-row">
+    <div class="step-connector-col">
+      <div class="step-number" style="background:var(--green);">7</div>
+      <div class="connector-line"></div>
+    </div>
+    <div class="step-card output">
+      <div class="step-card-header">
+        <div class="step-title">Results Dashboard — Score + Full Breakdown</div>
+        <div class="module-badge mb-output">Output</div>
+      </div>
+      <div class="step-desc">The results page is the core product experience. It must be immediately readable, honest about the score, and specific enough that the user knows exactly what to do next — whether their score is 92 or 41.</div>
+      <div class="step-points">
+        <div class="step-point">Composite score displayed large — no softening, no rounding up</div>
+        <div class="step-point">Funder Fit Score displayed alongside application score</div>
+        <div class="step-point">Visual dimension breakdown (radar or bar chart) showing relative strengths and weaknesses</div>
+        <div class="step-point">Per-dimension feedback: score + specific 2–3 sentence advisory</div>
+        <div class="step-point">Readiness gaps surfaced with priority flags (Critical / Significant / Developmental)</div>
+        <div class="step-point">Score band interpretation shown clearly (see bands below)</div>
+      </div>
+    </div>
+  </div>
 
-function editReadiness(){
-  document.getElementById('vw-results').style.display='none';
-  document.getElementById('vw-results').innerHTML='';
-  buildSliders();
-  document.getElementById('vw-readiness').style.display='block';
-  window.scrollTo(0,0);
-}
+  <!-- Score Bands -->
+  <div class="score-bands">
+    <div class="score-band sb-a">
+      <div class="range">85–100</div>
+      <div class="verdict">Competitive</div>
+      <p>Submit with confidence. Address any flagged items before deadline.</p>
+    </div>
+    <div class="score-band sb-b">
+      <div class="range">70–84</div>
+      <div class="verdict">Viable</div>
+      <p>Address all flagged gaps before submitting. Competitive with revision.</p>
+    </div>
+    <div class="score-band sb-c">
+      <div class="range">55–69</div>
+      <div class="verdict">Marginal</div>
+      <p>Significant revision required. Consider whether to submit this cycle.</p>
+    </div>
+    <div class="score-band sb-d">
+      <div class="range">Below 55</div>
+      <div class="verdict">Not Ready</div>
+      <p>Do not submit. See Readiness Path for structured next steps.</p>
+    </div>
+  </div>
 
-function resetAll(){
-  document.getElementById('vw-results').style.display='none';
-  document.getElementById('vw-results').innerHTML='';
-  readiness={};
-  document.getElementById('vw-input').style.display='block';
-  window.scrollTo(0,0);
-}
+  <!-- ═══════════════════════════════════════════════
+       STAGE 5 — DECISION BRANCH
+  ═══════════════════════════════════════════════ -->
+  <div class="section-divider"><span>Stage 5 · Decision Branch</span></div>
 
-function filterFunders(){
-  const q=(document.getElementById('funder-search').value||'').toLowerCase();
-  document.getElementById('funder-list').innerHTML=FUNDERS
-    .filter(f=>f.name.toLowerCase().includes(q)||f.focus.toLowerCase().includes(q))
-    .map(f=>`<div class="funder-row"><div><div class="funder-name">${f.name}</div><div class="funder-focus">${f.focus}</div></div><div class="funder-dl">${f.deadline}</div></div>`).join('');
-}
+  <div class="step-row">
+    <div class="step-connector-col">
+      <div class="step-number" style="background:var(--amber);">8</div>
+      <div class="connector-line dashed"></div>
+    </div>
+    <div class="step-card branch">
+      <div class="step-card-header">
+        <div class="step-title">Score Gate — Ready to Apply?</div>
+        <div class="module-badge mb-branch">Decision Point</div>
+      </div>
+      <div class="step-desc">Based on the composite score, the platform routes the user to one of two primary tracks. This is not a wall — it is honest guidance. Users scoring below 70 are not blocked; they are redirected toward building the capability to succeed.</div>
+    </div>
+  </div>
 
-function buildCalendar(){
-  document.getElementById('cal-grid').innerHTML=SEASONS.map(s=>`<div class="cal-card"><div class="cal-q">${s.q}</div>${s.events.map(e=>`<div class="cal-ev">• ${e}</div>`).join('')}</div>`).join('');
-}
+  <div class="branch-container">
+    <div class="branch-card yes">
+      <div class="branch-label">✓ Score ≥ 70 — Ready Track</div>
+      <h4>Proceed to Application</h4>
+      <p>User receives a prioritized action checklist of remaining gaps to address before submission. Grant Prep Checklist (Module 04) surfaced with completion status. Compliance Calendar link provided for filing deadline awareness. Share Your Score module (Module 10) activated.</p>
+    </div>
+    <div class="branch-card no">
+      <div class="branch-label">⚠ Score &lt; 70 — Readiness Track</div>
+      <h4>Build Before You Apply</h4>
+      <p>User routed to the Readiness Path (Module 08) — a structured 90-day or 12-month action plan built from their specific gaps. Alternative grant types surfaced that match current readiness level. Compliance calendar embedded as milestones. Option to rescore after improvements made.</p>
+    </div>
+  </div>
 
-// INIT
-filterFunders();
-buildCalendar();
-checkEmailGate();
-</script>
+  <!-- ═══════════════════════════════════════════════
+       STAGE 6 — POST-SCORE ACTIONS
+  ═══════════════════════════════════════════════ -->
+  <div class="section-divider"><span>Stage 6 · Post-Score Actions</span></div>
+
+  <div class="step-row">
+    <div class="step-connector-col">
+      <div class="step-number" style="background:var(--green);">9</div>
+      <div class="connector-line"></div>
+    </div>
+    <div class="step-card output">
+      <div class="step-card-header">
+        <div class="step-title">Grant Prep Checklist — Module 04</div>
+        <div class="module-badge mb-output">Action Output</div>
+      </div>
+      <div class="step-desc">Users on the Ready Track receive their Grant Prep Checklist with completion status pre-populated from their readiness assessment. Items marked missing are flagged by priority. Users can download or print the checklist.</div>
+      <div class="step-points">
+        <div class="step-point">Pre-populated with items marked complete / missing / unknown from readiness assessment</div>
+        <div class="step-point">Priority flags: Critical (likely disqualifying if missing) / Significant / Developmental</div>
+        <div class="step-point">Each item includes plain-language explanation of why funders require it</div>
+        <div class="step-point">Downloadable PDF checklist for offline use</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-row">
+    <div class="step-connector-col">
+      <div class="step-number" style="background:var(--green);">10</div>
+      <div class="connector-line"></div>
+    </div>
+    <div class="step-card output">
+      <div class="step-card-header">
+        <div class="step-title">Share Your Score — Module 10</div>
+        <div class="module-badge mb-output">Viral Loop</div>
+      </div>
+      <div class="step-desc">After results, users can generate and share platform-ready social content built from their actual score data — not templates. This is the acquisition engine. Every shared score drives new users to the platform.</div>
+      <div class="step-points">
+        <div class="step-point">LinkedIn post — professional, funder-facing, credibility-building</div>
+        <div class="step-point">Facebook post — community and nonprofit group optimized</div>
+        <div class="step-point">Instagram caption with relevant hashtags</div>
+        <div class="step-point">X/Twitter — punchy hook with score and one key result</div>
+        <div class="step-point">All content personalized to actual dimension scores — not generic "I scored 84" copy</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       STANDING RESOURCES
+  ═══════════════════════════════════════════════ -->
+  <div class="section-divider"><span>Standing Resources — Accessible at Any Point in the Flow</span></div>
+
+  <div class="resource-grid">
+    <div class="resource-card">
+      <div class="mod-tag">Module 05</div>
+      <h4>Grant Type Library</h4>
+      <p>Every major grant type explained — requirements, typical seasons, realistic timelines. Accessible from navigation at any point. Educates users before they enter the scoring flow.</p>
+    </div>
+    <div class="resource-card">
+      <div class="mod-tag">Module 06</div>
+      <h4>Grant Season Calendar</h4>
+      <p>Federal and major foundation grant cycles by type and funding area. Filterable. Helps users plan 90–180 days ahead rather than react to open windows.</p>
+    </div>
+    <div class="resource-card">
+      <div class="mod-tag">Module 07</div>
+      <h4>Local Funder Directory</h4>
+      <p>Curated directory of local and regional funders with grant seasons, award ranges, and contact links. NC-anchored in V2. The feature that drives return visits.</p>
+    </div>
+    <div class="resource-card">
+      <div class="mod-tag">Module 08</div>
+      <h4>Readiness Path</h4>
+      <p>Structured 90-day or 12-month action plan for organizations not yet competitive. Triggered by score gate but also accessible directly from navigation.</p>
+    </div>
+    <div class="resource-card">
+      <div class="mod-tag">Module 09</div>
+      <h4>Compliance Calendar</h4>
+      <p>990 deadlines, state charitable solicitation renewals, and governance filing requirements. Static resource page plus tool-integrated milestone flags.</p>
+    </div>
+    <div class="resource-card" style="border-top-color: var(--gold);">
+      <div class="mod-tag" style="color:var(--navy);">Entry Point</div>
+      <h4>Re-Score Anytime</h4>
+      <p>Users who completed the Readiness Path can return and rescore. Platform recognizes returning users and surfaces prior score for comparison. Progress is the product.</p>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════
+       FLOW SUMMARY
+  ═══════════════════════════════════════════════ -->
+  <div class="section-divider"><span>Flow Summary</span></div>
+
+  <div style="background:var(--navy); border-radius:12px; padding:32px 36px; color:white; display:grid; grid-template-columns:repeat(5,1fr); gap:0; text-align:center;">
+    <div style="padding:0 16px; border-right:1px solid rgba(255,255,255,0.1);">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Stage 1</div>
+      <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:4px;">Land</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.5);line-height:1.5;">Arrive · Learn · Begin</div>
+    </div>
+    <div style="padding:0 16px; border-right:1px solid rgba(255,255,255,0.1);">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Stage 2</div>
+      <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:4px;">Input</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.5);line-height:1.5;">Funder · Org · Application</div>
+    </div>
+    <div style="padding:0 16px; border-right:1px solid rgba(255,255,255,0.1);">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Stage 3</div>
+      <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:4px;">Score</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.5);line-height:1.5;">Fit Score · App Score</div>
+    </div>
+    <div style="padding:0 16px; border-right:1px solid rgba(255,255,255,0.1);">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Stage 4–5</div>
+      <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:4px;">Results</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.5);line-height:1.5;">Dashboard · Branch · Path</div>
+    </div>
+    <div style="padding:0 16px;">
+      <div style="font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--gold);margin-bottom:8px;">Stage 6</div>
+      <div style="font-family:'Playfair Display',serif;font-size:15px;font-weight:700;margin-bottom:4px;">Act</div>
+      <div style="font-size:12px;color:rgba(255,255,255,.5);line-height:1.5;">Checklist · Share · Return</div>
+    </div>
+  </div>
+
+</div><!-- /container -->
+
+<footer>
+  <strong>GSP-UF-001</strong> · GrantScore Pro V2 User Flow Wireframe · April 20, 2026 · Terri Bradley, Founder · grantscorepro.vercel.app
+</footer>
+
 </body>
 </html>
