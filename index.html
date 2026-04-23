@@ -91,10 +91,10 @@ select option{background:#1a1a2e;color:#fff}
 .grid-2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
 .social-row{background:rgba(255,255,255,0.03);border-radius:8px;padding:13px;margin-bottom:14px}
 
-/* ── MODALS ── */
+/* MODALS */
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;backdrop-filter:blur(6px);opacity:0;pointer-events:none;transition:opacity 0.3s}
 .modal-overlay.open{opacity:1;pointer-events:all}
-.modal{background:#111118;border:1px solid rgba(201,168,76,0.3);border-radius:16px;padding:40px 36px;max-width:480px;width:100%;position:relative;box-shadow:0 0 80px rgba(201,168,76,0.08)}
+.modal{background:#111118;border:1px solid rgba(201,168,76,0.3);border-radius:16px;padding:40px 36px;max-width:520px;width:100%;position:relative;box-shadow:0 0 80px rgba(201,168,76,0.08)}
 .modal-crown{font-size:36px;text-align:center;margin-bottom:16px}
 .modal-title{font-size:26px;font-weight:900;letter-spacing:-1px;color:#fff;text-align:center;margin-bottom:6px;font-family:'DM Sans',sans-serif}
 .modal-title span{color:#c9a84c}
@@ -103,7 +103,7 @@ select option{background:#1a1a2e;color:#fff}
 .modal-features{margin-bottom:28px}
 .modal-feat{display:flex;align-items:center;gap:10px;padding:8px 0;font-size:12px;color:rgba(255,255,255,0.65)}
 .modal-feat-icon{width:18px;height:18px;border-radius:50%;background:rgba(201,168,76,0.15);border:1px solid rgba(201,168,76,0.4);display:flex;align-items:center;justify-content:center;font-size:9px;color:#c9a84c;flex-shrink:0}
-.modal-tiers{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px}
+.modal-tiers{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:20px}
 .tier-card{background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:10px;padding:14px;cursor:pointer;transition:all 0.2s;text-align:center}
 .tier-card:hover,.tier-card.selected{border-color:rgba(201,168,76,0.5);background:rgba(201,168,76,0.06)}
 .tier-name{font-size:10px;font-weight:800;letter-spacing:1.5px;color:rgba(255,255,255,0.5);text-transform:uppercase;margin-bottom:4px}
@@ -111,7 +111,7 @@ select option{background:#1a1a2e;color:#fff}
 .tier-desc{font-size:9px;color:rgba(255,255,255,0.3);margin-top:3px;line-height:1.4}
 .modal-note{font-size:10px;color:rgba(255,255,255,0.25);text-align:center;margin-top:14px;line-height:1.5}
 
-/* ── EMAIL GATE MODAL ── */
+/* EMAIL GATE MODAL */
 .email-modal{background:#111118;border:1px solid rgba(59,158,255,0.25);border-radius:16px;padding:40px 36px;max-width:440px;width:100%;box-shadow:0 0 80px rgba(59,158,255,0.06)}
 .email-modal-icon{font-size:40px;text-align:center;margin-bottom:16px}
 .email-modal-title{font-size:24px;font-weight:900;letter-spacing:-1px;color:#fff;text-align:center;margin-bottom:8px;font-family:'DM Sans',sans-serif}
@@ -123,7 +123,7 @@ select option{background:#1a1a2e;color:#fff}
 .skip-link{display:block;text-align:center;margin-top:12px;font-size:10px;color:rgba(255,255,255,0.25);cursor:pointer;letter-spacing:1px;text-transform:uppercase}
 .skip-link:hover{color:rgba(255,255,255,0.45)}
 
-/* ── REPORT EMAIL BOX ── */
+/* REPORT EMAIL BOX */
 .report-email-box{background:rgba(59,158,255,0.06);border:1px solid rgba(59,158,255,0.2);border-radius:10px;padding:16px 18px;margin-bottom:16px}
 .report-email-title{font-size:11px;font-weight:800;color:#3b9eff;letter-spacing:1px;text-transform:uppercase;margin-bottom:4px}
 .report-email-sub{font-size:11px;color:rgba(255,255,255,0.4);margin-bottom:12px;line-height:1.5}
@@ -131,7 +131,7 @@ select option{background:#1a1a2e;color:#fff}
 .report-email-row input{margin-bottom:0;flex:1;min-width:160px}
 .report-email-sent{font-size:12px;color:#00c47a;font-weight:700;display:none;padding:8px 0}
 
-/* ── WARN BANNER ── */
+/* WARN BANNER */
 .warn-banner{background:rgba(240,180,41,0.08);border:1px solid rgba(240,180,41,0.25);border-radius:8px;padding:10px 16px;margin-bottom:16px;display:flex;align-items:center;justify-content:space-between;gap:12px}
 .warn-banner-txt{font-size:11px;color:#f0b429;font-weight:600}
 .warn-banner-cta{font-size:10px;color:#f0b429;font-weight:800;letter-spacing:1px;cursor:pointer;text-decoration:underline;white-space:nowrap;background:none;border:none}
@@ -172,7 +172,7 @@ select option{background:#1a1a2e;color:#fff}
       <div class="modal-feat"><div class="modal-feat-icon">✓</div>Score history & exportable reports</div>
       <div class="modal-feat"><div class="modal-feat-icon">✓</div>Priority access to V3 Funder Intelligence</div>
     </div>
-    <div class="modal-tiers" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="modal-tiers">
       <div class="tier-card selected" id="tier-pro" onclick="selectTier('pro')">
         <div class="tier-name">Pro</div>
         <div class="tier-price">$19<span style="font-size:11px;font-weight:600;color:rgba(201,168,76,0.6)">/mo</span></div>
@@ -182,11 +182,11 @@ select option{background:#1a1a2e;color:#fff}
         <div class="tier-name">Team</div>
         <div class="tier-price">$49<span style="font-size:11px;font-weight:600;color:rgba(201,168,76,0.6)">/mo</span></div>
         <div class="tier-desc">Up to 5 users — ED + board + staff</div>
-        <div class="tier-card" id="tier-agency" onclick="selectTier('agency')">
+      </div>
+      <div class="tier-card" id="tier-agency" onclick="selectTier('agency')">
         <div class="tier-name">Agency</div>
         <div class="tier-price">$149<span style="font-size:11px;font-weight:600;color:rgba(201,168,76,0.6)">/mo</span></div>
         <div class="tier-desc">Consultants managing multiple nonprofits</div>
-      </div>
       </div>
     </div>
     <button class="btn-gold" id="upgrade-cta" onclick="handleUpgrade()">Unlock Full Access →</button>
@@ -207,8 +207,6 @@ select option{background:#1a1a2e;color:#fff}
 <div class="main">
 
   <div id="pg-score" class="page active">
-
-
 
     <!-- INPUT VIEW -->
     <div id="vw-input">
@@ -322,7 +320,7 @@ select option{background:#1a1a2e;color:#fff}
 </div>
 
 <script>
-// ── CONFIG ──
+// CONFIG
 const FREE_LIMIT = 50;
 const STORAGE_KEY = 'gsp_score_count';
 const EMAIL_KEY = 'gsp_user_email';
@@ -336,7 +334,14 @@ const ENTRY_SCORE = 'entry.666362287';
 const ENTRY_ORG   = 'entry.1144984992';
 const ENTRY_COMMENT = 'entry.1655417842';
 
-// ── USAGE HELPERS ──
+// Stripe Payment Links
+const STRIPE_LINKS = {
+  pro:    'https://buy.stripe.com/6oU28ra7i1px4s9fzE8Vi00',
+  team:   'https://buy.stripe.com/bJedR93IU2tB0bT9bg8Vi01',
+  agency: 'https://buy.stripe.com/dRm28r1AM1px2k14V08Vi02'
+};
+
+// USAGE HELPERS
 function getCount(){ return parseInt(localStorage.getItem(STORAGE_KEY)||'0',10); }
 function incrementCount(){ localStorage.setItem(STORAGE_KEY, getCount()+1); }
 function isLocked(){ return getCount() >= FREE_LIMIT; }
@@ -344,7 +349,7 @@ function remaining(){ return Math.max(0, FREE_LIMIT - getCount()); }
 function getSavedEmail(){ return localStorage.getItem(EMAIL_KEY)||''; }
 function getSavedOrg(){ return localStorage.getItem(ORG_KEY)||''; }
 
-// ── GOOGLE FORM SUBMIT (no-cors silent post) ──
+// GOOGLE FORM SUBMIT
 function submitToGoogleForm(email, org, score, comment){
   const params = new URLSearchParams();
   params.append(ENTRY_EMAIL, email||'');
@@ -359,7 +364,7 @@ function submitToGoogleForm(email, org, score, comment){
   }).catch(()=>{});
 }
 
-// ── EMAIL GATE ──
+// EMAIL GATE
 function checkEmailGate(){
   if(!localStorage.getItem(GATE_KEY)){
     document.getElementById('email-gate-modal').classList.add('open');
@@ -378,7 +383,6 @@ function submitEmailGate(){
   localStorage.setItem(EMAIL_KEY, email);
   localStorage.setItem(ORG_KEY, org);
   localStorage.setItem(GATE_KEY, '1');
-  // Submit welcome entry to Google Form (score = 'signup', comment = 'welcome')
   submitToGoogleForm(email, org, 'signup', 'New user registration');
   document.getElementById('email-gate-modal').classList.remove('open');
 }
@@ -388,7 +392,7 @@ function skipEmailGate(){
   document.getElementById('email-gate-modal').classList.remove('open');
 }
 
-// ── UPGRADE MODAL ──
+// UPGRADE MODAL
 let selectedTier = 'pro';
 function selectTier(t){
   selectedTier = t;
@@ -402,17 +406,14 @@ function closeUpgradeModal(){
   document.getElementById('upgrade-modal').classList.remove('open');
 }
 function handleUpgrade(){
-  const links = {
-    pro: 'https://buy.stripe.com/6oU28ra7i1px4s9fzE8Vi00',
-    team: 'https://buy.stripe.com/bJedR93IU2tB0bT9bg8Vi01'
-  };
-  window.open(links[selectedTier], '_blank');
+  const url = STRIPE_LINKS[selectedTier];
+  if(url) window.open(url, '_blank');
 }
 document.getElementById('upgrade-modal').addEventListener('click', function(e){
   if(e.target === this) closeUpgradeModal();
 });
 
-// ── USAGE BADGE ──
+// USAGE BADGE
 function updateUsageBadge(){
   const r = remaining();
   const badge = document.getElementById('uses-badge');
@@ -433,7 +434,7 @@ function updateUsageBadge(){
   }
 }
 
-// ── DIMS & DATA ──
+// DIMS & DATA
 const DIMS=[
   {key:"mission",label:"Mission Alignment",weight:0.25,tip:"How closely does your mission match the funder's stated priorities?"},
   {key:"capacity",label:"Org Capacity",weight:0.20,tip:"Staff, systems, and bandwidth to execute and report."},
@@ -467,6 +468,7 @@ const FUNDERS=[
   {name:"Cannon Foundation",focus:"NC human services, education, health",deadline:"Rolling"},
   {name:"Lyndhurst Foundation",focus:"Chattanooga + SE US",deadline:"Invitation only"},
 ];
+
 const SEASONS=[
   {q:"Q1 (Jan–Mar)",events:["Federal LOIs open (many programs)","United Way spring cycle opens","NC Arts Council Letters of Inquiry","Foundation spring cycles begin"]},
   {q:"Q2 (Apr–Jun)",events:["Community foundation spring deadlines","Hey Helen Grant (April 30)","State agency FY close — watch carryover","Golden LEAF spring cycle"]},
@@ -537,10 +539,7 @@ function calcScore(){
   const msgs=["Analyzing mission alignment...","Weighting org capacity...","Checking track record...","Scoring budget fit...","Evaluating narrative strength...","Calculating composite score...","Generating readiness report..."];
   let i=0;const ml=document.getElementById('load-msg');
   const t=setInterval(()=>{i++;ml.textContent=msgs[i%msgs.length];},700);
-  setTimeout(()=>{
-    clearInterval(t);
-    showResults();
-  },2600);
+  setTimeout(()=>{clearInterval(t);showResults();},2600);
 }
 
 function computeScore(){
@@ -548,34 +547,23 @@ function computeScore(){
   return Math.min(100,Math.max(0,Math.round((raw/10)*100)));
 }
 
-// ── REPORT EMAIL SUBMIT ──
 function sendReportEmail(score, band, org, funder){
   const emailInput = document.getElementById('report-email-input');
   const sentMsg = document.getElementById('report-email-sent');
   const btn = document.getElementById('report-email-btn');
   const email = emailInput ? emailInput.value.trim() : getSavedEmail();
-
   if(!email || !email.includes('@')){
     if(emailInput) emailInput.style.borderColor='rgba(245,101,101,0.5)';
     return;
   }
   if(emailInput) emailInput.style.borderColor='rgba(255,255,255,0.12)';
-
-  // Get top 3 weak dims for tips
-  const weakDims = DIMS.filter(d=>(readiness[d.key]??5)<7)
-    .sort((a,b)=>b.weight-a.weight).slice(0,3);
+  const weakDims = DIMS.filter(d=>(readiness[d.key]??5)<7).sort((a,b)=>b.weight-a.weight).slice(0,3);
   const tipsText = weakDims.map((d,i)=>`Tip ${i+1} — ${d.label}: ${TIPS_BY_DIM[d.key]}`).join(' | ');
-
   const comment = `Score: ${score} | Band: ${band} | Funder: ${funder} | Top tips: ${tipsText}`;
   submitToGoogleForm(email, org, String(score), comment);
-
   if(btn) btn.style.display='none';
   if(emailInput) emailInput.style.display='none';
-  if(sentMsg){
-    sentMsg.style.display='block';
-    sentMsg.textContent = `✓ Report sent to ${email}`;
-  }
-  // Save email for future use
+  if(sentMsg){sentMsg.style.display='block';sentMsg.textContent=`✓ Report sent to ${email}`;}
   localStorage.setItem(EMAIL_KEY, email);
 }
 
@@ -589,12 +577,9 @@ function showResults(){
   const gtype=document.getElementById('grantType').value;
   const ask=document.getElementById('askAmt').value;
   const social=document.getElementById('socialAudit').value;
-  const savedEmail = getSavedEmail();
-
+  const savedEmail=getSavedEmail();
   const r=52,circ=2*Math.PI*r,dash=(score/100)*circ;
-  const weakDims=DIMS.filter(d=>(readiness[d.key]??5)<5).sort((a,c)=>c.weight-a.weight);
   const topWeakForTips=DIMS.filter(d=>(readiness[d.key]??5)<7).sort((a,c)=>c.weight-a.weight).slice(0,3);
-
   const checklist=[
     {item:"IRS Determination Letter on file",done:(readiness.compliance??5)>=7},
     {item:"990 or 990-N filed and current",done:(readiness.compliance??5)>=6},
@@ -606,23 +591,19 @@ function showResults(){
     {item:"Letters of support secured",done:false},
     {item:"Budget narrative prepared",done:false},
   ];
-
-  const remNote = `<div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);border-radius:8px;padding:9px 14px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
+  const remNote=`<div style="background:rgba(201,168,76,0.06);border:1px solid rgba(201,168,76,0.15);border-radius:8px;padding:9px 14px;margin-bottom:14px;display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap">
     <span style="font-size:11px;color:rgba(201,168,76,0.7)">✦ Free access — unlimited scoring while you're in our first 50.</span>
     <span style="font-size:10px;color:rgba(201,168,76,0.5);cursor:pointer;text-decoration:underline" onclick="openUpgradeModal()">See Pro features →</span>
   </div>`;
-
-  // Report email box
-  const reportEmailBox = `
-    <div class="report-email-box">
-      <div class="report-email-title">📧 Email My Report</div>
-      <div class="report-email-sub">Get your score summary + top improvement tips sent to your inbox.</div>
-      <div class="report-email-row">
-        <input id="report-email-input" type="email" placeholder="${savedEmail||'you@yourorg.org'}" value="${savedEmail}" style="margin-bottom:0" />
-        <button class="btn" id="report-email-btn" onclick="sendReportEmail(${score},'${b.label.replace(/'/g,"\\'")}','${org.replace(/'/g,"\\'")}','${funder.replace(/'/g,"\\'")}')">Send Report →</button>
-      </div>
-      <div id="report-email-sent" class="report-email-sent"></div>
-    </div>`;
+  const reportEmailBox=`<div class="report-email-box">
+    <div class="report-email-title">📧 Email My Report</div>
+    <div class="report-email-sub">Get your score summary + top improvement tips sent to your inbox.</div>
+    <div class="report-email-row">
+      <input id="report-email-input" type="email" placeholder="${savedEmail||'you@yourorg.org'}" value="${savedEmail}" style="margin-bottom:0" />
+      <button class="btn" id="report-email-btn" onclick="sendReportEmail(${score},'${b.label.replace(/'/g,"\\'")}','${org.replace(/'/g,"\\'")}','${funder.replace(/'/g,"\\'")}')">Send Report →</button>
+    </div>
+    <div id="report-email-sent" class="report-email-sent"></div>
+  </div>`;
 
   let html=`
     <div class="step-row">
@@ -632,10 +613,8 @@ function showResults(){
       <div class="step-line"></div>
       <div class="step-dot done" style="background:#3b9eff;color:#000">✓</div><span class="step-lbl active">Results</span>
     </div>
-
     ${remNote}
     ${reportEmailBox}
-
     <div style="display:flex;gap:24px;align-items:flex-start;margin-bottom:22px;flex-wrap:wrap">
       <div style="text-align:center">
         <svg width="120" height="120" style="transform:rotate(-90deg)">
@@ -660,55 +639,33 @@ function showResults(){
         </div>
       </div>
     </div>
-
     <div class="tab-row">
       <button class="tab active" onclick="switchTab('overview',this)">OVERVIEW</button>
       <button class="tab" onclick="switchTab('checklist',this)">CHECKLIST</button>
       <button class="tab" onclick="switchTab('path',this)">PATH</button>
       <button class="tab" onclick="switchTab('share',this)">SHARE</button>
     </div>
-
     <div id="tab-overview">
-      ${DIMS.map(d=>{
-        const v=readiness[d.key]??5;
-        const c=v>=7?'#00c47a':v>=5?'#c9a84c':'#f56565';
-        return`<div class="bar-row">
-          <div class="bar-top"><span>${d.label}</span><span style="color:${c}">${v}/10 <span style="color:rgba(255,255,255,0.25);font-size:9px">${Math.round(d.weight*100)}% weight</span></span></div>
-          <div class="bar-track"><div class="bar-fill" style="width:${v*10}%;background:${c}"></div></div>
-        </div>`;
-      }).join('')}
+      ${DIMS.map(d=>{const v=readiness[d.key]??5;const c=v>=7?'#00c47a':v>=5?'#c9a84c':'#f56565';return`<div class="bar-row"><div class="bar-top"><span>${d.label}</span><span style="color:${c}">${v}/10 <span style="color:rgba(255,255,255,0.25);font-size:9px">${Math.round(d.weight*100)}% weight</span></span></div><div class="bar-track"><div class="bar-fill" style="width:${v*10}%;background:${c}"></div></div></div>`;}).join('')}
     </div>
-
     <div id="tab-checklist" style="display:none">
       <p style="font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:12px">Pre-submission checklist based on your inputs.</p>
-      ${checklist.map(c=>`<div class="check-item">
-        <span style="font-size:16px;color:${c.done?'#00c47a':'#f56565'};min-width:20px">${c.done?'✓':'✗'}</span>
-        <span style="color:${c.done?'rgba(255,255,255,0.55)':'#fff'};font-weight:${c.done?400:600}">${c.item}</span>
-      </div>`).join('')}
+      ${checklist.map(c=>`<div class="check-item"><span style="font-size:16px;color:${c.done?'#00c47a':'#f56565'};min-width:20px">${c.done?'✓':'✗'}</span><span style="color:${c.done?'rgba(255,255,255,0.55)':'#fff'};font-weight:${c.done?400:600}">${c.item}</span></div>`).join('')}
     </div>
-
     <div id="tab-path" style="display:none">
       ${topWeakForTips.length===0
         ?'<p style="color:#00c47a;font-weight:700;font-size:13px;padding:12px 0">All dimensions are strong. Proceed with confidence.</p>'
         :`<p style="font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:12px">Your highest-impact improvements, ranked by scoring weight.</p>
-        ${topWeakForTips.map((d,i)=>`<div class="gap-card">
-          <div class="gap-title"><span>${i+1}. ${d.label}</span><span class="gap-pts">+${Math.round(d.weight*100)} pts potential</span></div>
-          <div class="gap-desc" style="margin-bottom:6px">${d.tip}</div>
-          <div style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.5;background:rgba(59,158,255,0.06);border-left:2px solid #3b9eff;padding:6px 10px;border-radius:0 4px 4px 0">→ ${TIPS_BY_DIM[d.key]}</div>
-        </div>`).join('')}`
+        ${topWeakForTips.map((d,i)=>`<div class="gap-card"><div class="gap-title"><span>${i+1}. ${d.label}</span><span class="gap-pts">+${Math.round(d.weight*100)} pts potential</span></div><div class="gap-desc" style="margin-bottom:6px">${d.tip}</div><div style="font-size:11px;color:rgba(255,255,255,0.6);line-height:1.5;background:rgba(59,158,255,0.06);border-left:2px solid #3b9eff;padding:6px 10px;border-radius:0 4px 4px 0">→ ${TIPS_BY_DIM[d.key]}</div></div>`).join('')}`
       }
-      <div style="margin-top:12px;padding:12px 15px;background:rgba(59,158,255,0.08);border-radius:8px;border-left:3px solid #3b9eff;font-size:11px;color:rgba(255,255,255,0.55)">
-        Address these gaps then re-run GrantScore Pro before submitting.
-      </div>
+      <div style="margin-top:12px;padding:12px 15px;background:rgba(59,158,255,0.08);border-radius:8px;border-left:3px solid #3b9eff;font-size:11px;color:rgba(255,255,255,0.55)">Address these gaps then re-run GrantScore Pro before submitting.</div>
     </div>
-
     <div id="tab-share" style="display:none">
       <p style="font-size:11px;color:rgba(255,255,255,0.35);margin-bottom:12px">Share your readiness score with your board, ED, or funders.</p>
       <div class="share-box">"I scored ${score}/100 on GrantScore Pro — ${b.label} for the ${funder} grant. grantscorepro.vercel.app"</div>
       <button class="btn" id="copy-btn" onclick="copyShare(${score},'${b.label.replace(/'/g,"\\'")}','${funder.replace(/'/g,"\\'")}')">Copy to Clipboard</button>
       <p style="font-size:11px;color:rgba(255,255,255,0.3);margin-top:12px">Attach your GrantScore report in funder correspondence to signal organizational maturity.</p>
     </div>
-
     <div style="display:flex;gap:10px;margin-top:24px;flex-wrap:wrap">
       <button class="btn-s" onclick="editReadiness()">← Edit Assessment</button>
       <button class="btn-s" onclick="resetAll()">Score Another Grant</button>
@@ -756,20 +713,14 @@ function filterFunders(){
   const q=(document.getElementById('funder-search').value||'').toLowerCase();
   document.getElementById('funder-list').innerHTML=FUNDERS
     .filter(f=>f.name.toLowerCase().includes(q)||f.focus.toLowerCase().includes(q))
-    .map(f=>`<div class="funder-row">
-      <div><div class="funder-name">${f.name}</div><div class="funder-focus">${f.focus}</div></div>
-      <div class="funder-dl">${f.deadline}</div>
-    </div>`).join('');
+    .map(f=>`<div class="funder-row"><div><div class="funder-name">${f.name}</div><div class="funder-focus">${f.focus}</div></div><div class="funder-dl">${f.deadline}</div></div>`).join('');
 }
 
 function buildCalendar(){
-  document.getElementById('cal-grid').innerHTML=SEASONS.map(s=>`<div class="cal-card">
-    <div class="cal-q">${s.q}</div>
-    ${s.events.map(e=>`<div class="cal-ev">• ${e}</div>`).join('')}
-  </div>`).join('');
+  document.getElementById('cal-grid').innerHTML=SEASONS.map(s=>`<div class="cal-card"><div class="cal-q">${s.q}</div>${s.events.map(e=>`<div class="cal-ev">• ${e}</div>`).join('')}</div>`).join('');
 }
 
-// ── INIT ──
+// INIT
 filterFunders();
 buildCalendar();
 checkEmailGate();
