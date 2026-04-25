@@ -322,7 +322,7 @@ select option{background:#1a1a2e;color:#fff}
 // ─── CONFIG ───────────────────────────────────────────────────────────────────
 const FREE_LIMIT   = 50;
 const STORAGE_KEY  = 'gsp_score_count';
-const EMABL_KEY    = 'gsp_user_email';
+const EMAIL_KEY    = 'gsp_user_email';
 const ORG_KEY      = 'gsp_user_org';
 const GATE_KEY     = 'gsp_gate_done';
 
@@ -586,6 +586,7 @@ function sendReportEmail(score, band, org, funder) {
 }
 
 function showResults() {
+  try {
   document.getElementById('vw-loading').style.display = 'none';
   const score = computeScore();
   const b     = getBand(score);
@@ -707,6 +708,15 @@ function showResults() {
   rv.innerHTML = html;
   rv.style.display = 'block';
   window.scrollTo(0, 0);
+  } catch(err) {
+    const rv = document.getElementById('vw-results');
+    rv.style.display = 'block';
+    rv.innerHTML = `<div style="background:rgba(245,101,101,0.15);border:1px solid #f56565;border-radius:8px;padding:20px;color:#f56565;font-family:monospace;font-size:13px;margin:20px 0">
+      <strong>Debug Error:</strong><br>${err.message}<br><br>
+      <span style="color:rgba(255,255,255,0.5);font-size:11px">${err.stack}</span>
+    </div>`;
+    window.scrollTo(0, 0);
+  }
 }
 
 function switchTab(name, btn) {
@@ -751,16 +761,4 @@ function filterFunders() {
 
 function buildCalendar() {
   document.getElementById('cal-grid').innerHTML = SEASONS.map(s =>
-    `<div class="cal-card"><div class="cal-q">${s.q}</div>${s.events.map(e => `<div class="cal-ev">• ${e}</div>`).join('')}</div>`
-  ).join('');
-}
-
-// ─── INIT ─────────────────────────────────────────────────────────────────────
-filterFunders();
-buildCalendar();
-updateUsageBadge();   // ← show correct score count on load
-checkEmailGate();     // ← show email capture modal for new users
-</script>
-<!-- v2.2 -->
-</body>
-</html>
+    `<div class="cal-card"><div class="cal-q">${s.q}</div>${s.events.map(e =>
