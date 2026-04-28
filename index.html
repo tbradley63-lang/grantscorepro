@@ -225,10 +225,11 @@ select option{background:#1a1a2e;color:#fff}
     <button class="nav-btn active" onclick="showPage('score',this)">Score a Grant</button>
     <button class="nav-btn" onclick="showPage('sample',this)" style="color:rgba(0,196,122,0.7);border-color:rgba(0,196,122,0.2)">Sample Report</button>
     <button class="nav-btn" onclick="showPage('methodology',this)">How It Works</button>
+    <button class="nav-btn" onclick="showPage('pricing',this)">Pricing</button>
     <button class="nav-btn" onclick="showPage('funders',this)">Funder Directory</button>
     <button class="nav-btn" onclick="showPage('calendar',this)">Grant Calendar</button>
     <button class="nav-btn" onclick="showPage('faq',this)">FAQ</button>
-    <button class="nav-btn" onclick="openUpgradeModal()" style="color:rgba(201,168,76,0.7);border-color:rgba(201,168,76,0.25)">See Plans</button>
+    <button class="nav-btn" onclick="showPage('about',this)">About</button>
   </div>
   <div class="uses-badge" id="uses-badge">Loading...</div>
 </div>
@@ -410,6 +411,169 @@ select option{background:#1a1a2e;color:#fff}
     <div class="hero" style="font-size:26px;margin-bottom:6px">Grant Season Calendar</div>
     <p class="sub" style="margin-bottom:18px">Strategic timing for NC and federal grant submissions.</p>
     <div class="cal-grid" id="cal-grid"></div>
+  </div>
+
+  <!-- PRICING -->
+  <div id="pg-pricing" class="page">
+    <div class="hero" style="font-size:26px;margin-bottom:6px">Simple, Transparent Pricing</div>
+    <p class="sub" style="margin-bottom:24px">Start free. Upgrade when you're ready. Cancel anytime — no contracts, no commitment.</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr 1fr;gap:14px;margin-bottom:24px" class="pricing-grid">
+
+      <!-- FREE -->
+      <div class="card" style="margin-bottom:0;border-color:rgba(255,255,255,0.1)">
+        <div style="font-size:10px;font-weight:800;color:rgba(255,255,255,0.4);letter-spacing:2px;text-transform:uppercase;margin-bottom:10px">Free Beta</div>
+        <div style="font-size:32px;font-weight:900;color:#fff;letter-spacing:-1px;margin-bottom:4px">$0</div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:16px">First 50 users · No card required</div>
+        <div style="height:1px;background:rgba(255,255,255,0.07);margin-bottom:14px"></div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:2">
+          <div>✓ Unlimited scoring (beta)</div>
+          <div>✓ Full 4-step flow</div>
+          <div>✓ Direction + Path tab</div>
+          <div>✓ NC Funder Directory</div>
+          <div style="color:rgba(255,255,255,0.2)">✗ PDF reports</div>
+          <div style="color:rgba(255,255,255,0.2)">✗ Score history</div>
+          <div style="color:rgba(255,255,255,0.2)">✗ Team access</div>
+        </div>
+        <div style="margin-top:16px;font-size:10px;color:rgba(255,255,255,0.25);line-height:1.5">Best for: Orgs exploring the tool</div>
+      </div>
+
+      <!-- PRO -->
+      <div class="card" style="margin-bottom:0;border-color:rgba(201,168,76,0.4);background:rgba(201,168,76,0.04);position:relative">
+        <div style="position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:linear-gradient(135deg,#c9a84c,#f0d080);color:#000;font-size:9px;font-weight:800;letter-spacing:1.5px;padding:3px 10px;border-radius:10px;white-space:nowrap">MOST POPULAR</div>
+        <div style="font-size:10px;font-weight:800;color:#c9a84c;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px">Pro</div>
+        <div style="font-size:32px;font-weight:900;color:#c9a84c;letter-spacing:-1px;margin-bottom:4px">$19<span style="font-size:14px;font-weight:600;opacity:.6">/mo</span></div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:16px">Solo grant writer or small nonprofit</div>
+        <div style="height:1px;background:rgba(201,168,76,0.15);margin-bottom:14px"></div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:2">
+          <div>✓ Unlimited scoring</div>
+          <div>✓ Full 4-step flow</div>
+          <div>✓ Direction + Path tab</div>
+          <div>✓ NC Funder Directory</div>
+          <div style="color:#c9a84c">✓ PDF report export</div>
+          <div style="color:#c9a84c">✓ Score history</div>
+          <div style="color:rgba(255,255,255,0.2)">✗ Team access</div>
+        </div>
+        <button class="btn-gold" style="margin-top:16px;padding:10px 0;font-size:11px" onclick="handleUpgrade('pro')">Get Pro →</button>
+        <div style="margin-top:8px;font-size:10px;color:rgba(255,255,255,0.2);text-align:center">Cancel anytime</div>
+      </div>
+
+      <!-- TEAM -->
+      <div class="card" style="margin-bottom:0;border-color:rgba(59,158,255,0.25)">
+        <div style="font-size:10px;font-weight:800;color:#3b9eff;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px">Team</div>
+        <div style="font-size:32px;font-weight:900;color:#3b9eff;letter-spacing:-1px;margin-bottom:4px">$49<span style="font-size:14px;font-weight:600;opacity:.6">/mo</span></div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:16px">Up to 5 users — ED, board + staff</div>
+        <div style="height:1px;background:rgba(59,158,255,0.15);margin-bottom:14px"></div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:2">
+          <div>✓ Everything in Pro</div>
+          <div style="color:#3b9eff">✓ 5-user team access</div>
+          <div style="color:#3b9eff">✓ Shared score history</div>
+          <div style="color:#3b9eff">✓ Collaborative reports</div>
+          <div style="color:rgba(255,255,255,0.2)">✗ Agency client mgmt</div>
+        </div>
+        <button class="btn" style="margin-top:16px;width:100%;justify-content:center;padding:10px 0;font-size:11px" onclick="handleUpgrade('team')">Get Team →</button>
+        <div style="margin-top:8px;font-size:10px;color:rgba(255,255,255,0.2);text-align:center">Cancel anytime</div>
+      </div>
+
+      <!-- AGENCY -->
+      <div class="card" style="margin-bottom:0;border-color:rgba(160,100,255,0.25)">
+        <div style="font-size:10px;font-weight:800;color:#a064ff;letter-spacing:2px;text-transform:uppercase;margin-bottom:10px">Agency</div>
+        <div style="font-size:32px;font-weight:900;color:#a064ff;letter-spacing:-1px;margin-bottom:4px">$149<span style="font-size:14px;font-weight:600;opacity:.6">/mo</span></div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.3);margin-bottom:16px">Consultants managing multiple clients</div>
+        <div style="height:1px;background:rgba(160,100,255,0.15);margin-bottom:14px"></div>
+        <div style="font-size:11px;color:rgba(255,255,255,0.5);line-height:2">
+          <div>✓ Everything in Team</div>
+          <div style="color:#a064ff">✓ Unlimited client orgs</div>
+          <div style="color:#a064ff">✓ White-label reports</div>
+          <div style="color:#a064ff">✓ Priority support</div>
+          <div style="color:#a064ff">✓ Early feature access</div>
+        </div>
+        <button class="btn" style="margin-top:16px;width:100%;justify-content:center;padding:10px 0;font-size:11px;background:#a064ff" onclick="handleUpgrade('agency')">Get Agency →</button>
+        <div style="margin-top:8px;font-size:10px;color:rgba(255,255,255,0.2);text-align:center">Cancel anytime</div>
+      </div>
+    </div>
+
+    <div class="card" style="text-align:center;margin-bottom:0">
+      <div style="font-size:13px;font-weight:700;color:#fff;margin-bottom:6px">All plans include</div>
+      <div style="display:flex;flex-wrap:wrap;justify-content:center;gap:18px;font-size:11px;color:rgba(255,255,255,0.4)">
+        <span>🔒 Your data is never stored or shared</span>
+        <span>⚡ Results in under 30 seconds</span>
+        <span>🏦 Powered by Stripe</span>
+        <span>✉️ hello@grantscorepro.com</span>
+      </div>
+    </div>
+
+    <style>
+      @media(max-width:700px){.pricing-grid{grid-template-columns:1fr 1fr!important}}
+      @media(max-width:480px){.pricing-grid{grid-template-columns:1fr!important}}
+    </style>
+  </div>
+
+  <!-- ABOUT -->
+  <div id="pg-about" class="page">
+    <div class="hero" style="font-size:26px;margin-bottom:6px">About GrantScore Pro</div>
+    <p class="sub" style="margin-bottom:24px">Built by grant professionals who know what funders look for — and what makes proposals fail.</p>
+
+    <div class="card" style="margin-bottom:14px">
+      <div class="lbl" style="margin-bottom:12px">Our Mission</div>
+      <p style="font-size:13px;color:rgba(255,255,255,0.65);line-height:1.8;margin-bottom:0">To help nonprofits submit stronger, more competitive grant proposals — with clarity, confidence, and data-driven insights. Grant writing is time-intensive, and organizations consistently submit proposals without knowing whether they're truly ready. GrantScore Pro gives you an objective readiness score and the exact steps to improve it — before you invest hours writing.</p>
+    </div>
+
+    <div class="card" style="margin-bottom:14px">
+      <div class="lbl" style="margin-bottom:16px">Our Background</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
+        <div style="background:rgba(59,158,255,0.05);border:1px solid rgba(59,158,255,0.12);border-radius:8px;padding:14px">
+          <div style="font-size:16px;margin-bottom:6px">📝</div>
+          <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:4px">Grant Writing</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.35);line-height:1.5">Years of experience writing and reviewing competitive proposals across foundation, corporate, federal, and United Way funding streams.</div>
+        </div>
+        <div style="background:rgba(59,158,255,0.05);border:1px solid rgba(59,158,255,0.12);border-radius:8px;padding:14px">
+          <div style="font-size:16px;margin-bottom:6px">🏛️</div>
+          <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:4px">Nonprofit Leadership</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.35);line-height:1.5">Deep organizational experience — program design, board governance, budget management, and funder relationship development.</div>
+        </div>
+        <div style="background:rgba(59,158,255,0.05);border:1px solid rgba(59,158,255,0.12);border-radius:8px;padding:14px">
+          <div style="font-size:16px;margin-bottom:6px">🔍</div>
+          <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:4px">Funder Evaluation</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.35);line-height:1.5">Built the scoring model on patterns from real funder rubrics, public scoring guidelines, and grantmaking standards — not guesswork.</div>
+        </div>
+        <div style="background:rgba(59,158,255,0.05);border:1px solid rgba(59,158,255,0.12);border-radius:8px;padding:14px">
+          <div style="font-size:16px;margin-bottom:6px">⚙️</div>
+          <div style="font-size:11px;font-weight:700;color:#fff;margin-bottom:4px">Data + AI Analysis</div>
+          <div style="font-size:10px;color:rgba(255,255,255,0.35);line-height:1.5">Blended scoring model combining structured rubric logic, AI-assisted narrative analysis, and NC-first funder alignment data.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:14px">
+      <div class="lbl" style="margin-bottom:12px">What We Believe</div>
+      <div style="display:flex;flex-direction:column;gap:10px">
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <div style="width:6px;height:6px;border-radius:50%;background:#3b9eff;margin-top:6px;flex-shrink:0"></div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6">Nonprofits deserve clarity — not rejection letters with no explanation.</div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <div style="width:6px;height:6px;border-radius:50%;background:#3b9eff;margin-top:6px;flex-shrink:0"></div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6">Grant writers deserve better tools than spreadsheets and gut instinct.</div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <div style="width:6px;height:6px;border-radius:50%;background:#3b9eff;margin-top:6px;flex-shrink:0"></div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6">Funders value alignment and readiness — and reward organizations that demonstrate both.</div>
+        </div>
+        <div style="display:flex;align-items:flex-start;gap:10px">
+          <div style="width:6px;height:6px;border-radius:50%;background:#3b9eff;margin-top:6px;flex-shrink:0"></div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.6);line-height:1.6">Data-driven preparation improves outcomes. Knowing your score before you submit changes how you write.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="card" style="margin-bottom:0">
+      <div class="lbl" style="margin-bottom:10px">Get in Touch</div>
+      <p style="font-size:12px;color:rgba(255,255,255,0.5);line-height:1.7;margin-bottom:14px">Questions about the tool, partnership inquiries, or feedback on your scoring experience — we want to hear from you.</p>
+      <div style="display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn" onclick="showPage('score', document.querySelector('.nav-btn'))" style="font-size:11px;padding:10px 20px">Score a Grant →</button>
+        <a href="mailto:hello@grantscorepro.com" style="display:inline-flex;align-items:center;gap:8px;background:transparent;color:rgba(255,255,255,0.45);border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:10px 18px;font-size:11px;font-family:DM Sans,sans-serif;font-weight:700;letter-spacing:1px;text-transform:uppercase;text-decoration:none">hello@grantscorepro.com</a>
+      </div>
+    </div>
   </div>
 
   <!-- SAMPLE REPORT -->
