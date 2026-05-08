@@ -410,3 +410,25 @@ document.addEventListener("DOMContentLoaded", () => {
   updateUsageBadge();
   checkEmailGate();
 });
+
+
+// ─── TAB SWITCHING (result tabs) ────────────────────────────────────────────
+function switchTab(name, btn) {
+  ['overview','application','checklist','path','share'].forEach(function(t) {
+    var el = document.getElementById('tab-' + t);
+    if (el) el.style.display = t === name ? 'block' : 'none';
+  });
+  document.querySelectorAll('.tab').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+}
+
+// ─── TAB SWITCHING (sample report tabs) ─────────────────────────────────────
+function switchSampleTab(name, btn) {
+  ['s-overview','s-application','s-checklist','s-path','s-share'].forEach(function(t) {
+    var el = document.getElementById(t);
+    if (el) el.style.display = t === name ? 'block' : 'none';
+  });
+  var tabRow = btn ? btn.closest('.tab-row') : null;
+  if (tabRow) tabRow.querySelectorAll('.tab').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+}
