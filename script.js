@@ -354,6 +354,21 @@ window.calcScore = function calcScore() {
     return;
   }
   window.incrementCount();
+  // Fix DOM structure: vw-loading and vw-results may be nested inside vw-application
+  // due to HTML corruption. Move them to be direct children of pg-score so that
+  // calcScore()'s hide/show logic works correctly.
+  (function fixDomStructure() {
+    var pgScore = document.getElementById('pg-score');
+    if (!pgScore) return;
+    ['vw-loading', 'vw-results'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el && el.parentElement && el.parentElement !== pgScore) {
+        pgScore.insertBefore(el, null);
+        console.log('GrantScorePro: moved #' + id + ' to pg-score');
+      }
+    });
+  })();
+
   window.updateUsageBadge();
   document.getElementById('vw-application').style.display = 'none';
   document.getElementById('vw-loading').style.display = 'block';
