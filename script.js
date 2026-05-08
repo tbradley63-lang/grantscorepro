@@ -215,6 +215,16 @@ window.getBand = function getBand(s) {
 
 // ─── NAVIGATION ───────────────────────────────────────────────────────────────
 window.showPage = function showPage(name, btn) {
+  // Fix: nav pages may be nested inside pg-score due to HTML corruption.
+  // Move them to be siblings of pg-score so CSS active/inactive toggling works.
+  var pgScore = document.getElementById('pg-score');
+  if (pgScore && pgScore.parentElement) {
+    var container = pgScore.parentElement;
+    ['funders','calendar','pricing','about','sample','methodology','faq'].forEach(function(p) {
+      var el = document.getElementById('pg-' + p);
+      if (el && el.parentElement !== container) container.appendChild(el);
+    });
+  }
   document.querySelectorAll('.page').forEach(function(p) { p.classList.remove('active'); });
   document.querySelectorAll('.nav-btn').forEach(function(b) { b.classList.remove('active'); });
   document.getElementById('pg-' + name).classList.add('active');
