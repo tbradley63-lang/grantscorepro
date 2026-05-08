@@ -370,6 +370,16 @@ window.calcScore = function calcScore() {
   })();
 
   window.updateUsageBadge();
+  // Move vw-loading and vw-results to pg-score before hiding vw-application,
+  // in case they are nested inside vw-application due to HTML structure issues.
+  (function ensureOutsideApp() {
+    var pgScore = document.getElementById('pg-score');
+    if (!pgScore) return;
+    ['vw-loading', 'vw-results'].forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el && el.parentElement !== pgScore) pgScore.appendChild(el);
+    });
+  })();
   document.getElementById('vw-application').style.display = 'none';
   document.getElementById('vw-loading').style.display = 'block';
   window.scrollTo(0, 0);
